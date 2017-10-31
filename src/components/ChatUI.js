@@ -48,7 +48,7 @@ class ChatUI extends Component {
   constructor(props){
     super(props);
     this.state = {
-      typing: '',
+      typing: null,
     };
     this.sendMessage = this.sendMessage.bind(this);
     this.renderRow = this.renderRow.bind(this);
@@ -150,7 +150,7 @@ class ChatUI extends Component {
                 name='paper-plane'
                 onPress={this.sendMessage}
                 underlayColor='#eee'
-                color='#C5CAE9'
+                color={this.state.typing ? '#7986CB' : '#C5CAE9'}
               />
             </View>
             
