@@ -48,6 +48,8 @@ export default class extends Component {
                     removeClippedSubviews={false}
                     showsPagination={false}
                     containerStyle={styles.wrapper}
+                    bounces
+                    autoplay
                     height={170}
                     loop={false}
                 >
