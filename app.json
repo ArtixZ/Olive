@@ -1,0 +1,23 @@
+// {
+//   "expo": {
+//     "sdkVersion": "19.0.0"
+//   },
+//   "facebookScheme": "fb1948774228735307" 
+// }
+
+{
+  "expo": {
+   "name": "Olive",
+   "icon": "./src/assets/pics/Icon_Blue@2x.png",
+   "version": "0.0.2",
+   "slug": "Olive",
+   "sdkVersion": "19.0.0",
+   "ios": {
+     "bundleIdentifier": "com.GenerativeLabs.Olive"
+   },
+   "android": {
+     "package": "com.GenerativeLabs.Olive"
+   }
+  },
+  "facebookScheme": "fb1948774228735307" 
+}
