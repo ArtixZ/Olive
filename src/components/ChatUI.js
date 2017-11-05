@@ -163,6 +163,7 @@ class ChatUI extends Component {
 
 const styles = StyleSheet.create({
   headerSty: {
+    position: 'relative',
     backgroundColor: '#F5F5F5',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -206,6 +207,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   footer: {
+    marginTop: 8,
     height: 50,    
     flexDirection: 'row',
     backgroundColor: 'white',
