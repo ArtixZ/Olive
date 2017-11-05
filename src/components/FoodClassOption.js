@@ -88,6 +88,7 @@ const styles={
     },
     portionSubTxtSty: {
         padding: 10,
+        paddingTop: 0,
         alignSelf: 'center',
         color: '#373850',
         fontSize: 16,
