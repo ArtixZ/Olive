@@ -126,7 +126,7 @@ class ChatUI extends Component {
           keyboardShouldPersistTaps={'never'}
           keyboardDismissMode={'on-drag'}
           />
-        <KeyboardAvoidingView behavior="padding">
+        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={70}>
           <View style={styles.footer}>
             <Icon
               type="entypo"
