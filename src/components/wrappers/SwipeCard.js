@@ -50,6 +50,7 @@ export default class extends Component {
                     containerStyle={styles.wrapper}
                     bounces
                     autoplay
+                    autoplayTimeout={30}
                     height={170}
                     loop={false}
                 >

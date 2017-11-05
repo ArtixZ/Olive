@@ -31,20 +31,20 @@ class FoodClassOptions extends Component {
         this.props.selectImgOption(option);
     }
 
-    renderBtn = ({item, index: i}) => {
-        return (
-            <CheckBox
-                center
-                title={item.food_class}
-                checkedIcon='dot-circle-o'
-                uncheckedIcon='circle-o'
-                checked={!!item.checked}
-                onIconPress={() => this.onPressBtn(i)}
-                onPress={() => this.onPressBtn(i)}
-                checkedColor='#5C6BC0'
-            />
-        )
-    }
+    // renderBtn = ({item, index: i}) => {
+    //     return (
+    //         <CheckBox
+    //             center
+    //             title={item.food_class}
+    //             checkedIcon='dot-circle-o'
+    //             uncheckedIcon='circle-o'
+    //             checked={!!item.checked}
+    //             onIconPress={() => this.onPressBtn(i)}
+    //             onPress={() => this.onPressBtn(i)}
+    //             checkedColor='#5C6BC0'
+    //         />
+    //     )
+    // }
 
     renderOptions = () => {
         const {options} = this.props;

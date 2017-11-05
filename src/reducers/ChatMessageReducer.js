@@ -8,6 +8,7 @@ import {
     TAKEN_IMAGE_RESPONSE_LOADING,
     CAMERA_IMAGE_FOOD_IMG,
     SELECT_OPTION,
+    SELECT_FOOD_PORTION,
 } from '../actions/types';
 
 import {data, IMAGES} from './data';
@@ -166,6 +167,11 @@ export default (state = INIT_STATE, action) => {
                     payload: action.payload
                 }
             }]
+        case SELECT_FOOD_PORTION:
+            const oldPayload = state[state.length - 1].body.payload;
+            const newPayload = Object.assign({portion: action.payload}, oldPayload);
+            state[state.length - 1].body.payload = newPayload;
+            return [...state];
         default: 
             return state;
     }

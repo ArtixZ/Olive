@@ -3,6 +3,7 @@ import {
     CAMERA_IMAGE_FOOD_IMG,
     TAKEN_IMAGE_RESPONSE_LOADING,
     SELECT_OPTION,
+    SELECT_FOOD_PORTION,
  } from './types';
 
  import {
@@ -53,6 +54,15 @@ export const selectImgOption = (option) => {
         dispatch({
             type: SELECT_OPTION,
             payload: option
+        })
+    }
+}
+
+export const selectFoodPortion = (portion) => {
+    return(dispatch, getState) => {
+        dispatch({
+            type: SELECT_FOOD_PORTION,
+            payload: portion
         })
     }
 }
