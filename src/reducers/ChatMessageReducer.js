@@ -122,7 +122,31 @@ export default (state = INIT_STATE, action) => {
             message = generateTxtMsg(action.payload);
             return [...state, message];
         case TXT_RESPONSE_MESSAGE:
-            const {positive, something} = action.payload;
+
+            const {positive, something, renderReport} = action.payload;
+            if(renderReport) {
+                return [...state, 
+                    {
+                        msg_id: `temp_${generateGuuId()}`,
+                        timeStamp: moment().toISOString(),
+                        direction: 'ingoing',
+                        body: {
+                            type: 'txt',
+                            msg: "Here's how you did last week"
+                        }
+                    },
+                    {
+                        msg_id: `temp_${generateGuuId()}`,
+                        timeStamp: moment().toISOString(),
+                        direction: 'ingoing',
+                        body: {
+                            type: 'renderReport',
+                            payload: {}
+                        }
+                    }
+                ];
+            }
+
             const txtMessage = generateTxtResponse(positive, something);
             const cardMessage = generateCardResponse(PAYLOADS, positive, something);
             if(cardMessage) {

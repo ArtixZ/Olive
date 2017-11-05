@@ -9,6 +9,7 @@ import SwipeCard from '../wrappers/SwipeCard';
 import FoodClassCard from '../wrappers/FoodClassCard';
 import FoodClassOptions from '../FoodClassOptions';
 import FoodClassOption from '../FoodClassOption';
+import ReportCard from '../ReportCard';
 import { respondTakenImg } from '../../actions/Camera';
 
 const MessageBubble = ({ outOrIn, timestamp, body, navigation, onResponse }) => {
@@ -95,6 +96,11 @@ const MessageBubble = ({ outOrIn, timestamp, body, navigation, onResponse }) => 
             return (
                 <FoodClassOption 
                     option={body.payload}
+                />
+            )
+        case 'renderReport':
+            return (
+                <ReportCard 
                 />
             )
         default:

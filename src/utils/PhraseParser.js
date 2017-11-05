@@ -6,6 +6,11 @@ const tags = ['healthy', 'protein', 'salad', 'pizza', 'burgers', 'catering', 'br
 
 export function phraseParser(msg) {
     const msgAry = msg.split(" ");
+    if(msgAry.find(item => item.toLowerCase() == 'report')) {
+        return {
+            renderReport: true
+        }
+    }
     const neg = msgAry.filter( item => negtiveSet.includes(item.toLowerCase()) );
     const pos = msgAry.filter( item => positiveSet.includes(item.toLowerCase()) );
 

@@ -29,7 +29,7 @@ class BarChart extends Component {
         const deviceWidth = Dimensions.get('window').width
         let widthAry = {};
         Object.keys(percentages).forEach( element => {
-            let width = percentages[element]*0.01*deviceWidth;
+            let width = percentages[element]*0.01*deviceWidth*0.5;
             widthAry[element] = width;
         }); 
 
