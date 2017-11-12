@@ -231,7 +231,21 @@ function generateTakenPic(uri) {
 
 function generateInitMsgs(messages) {
     messages = messages.filter( i=> !!i.image_uri);
-    
+    if(messages.length < 3) {
+        const initialMsgs = messages.map( (msg) => {
+            return (
+            {
+                msg_id: `temp_${generateGuuId()}`,
+                timeStamp: moment().toISOString(),
+                direction: 'ingoing',
+                body: {
+                    type: 'card',
+                    payload: msg
+                }
+            })
+        })
+        return initialMsgs;
+    }
     const m = Math.ceil(messages.length / 3);
     const n = Math.ceil(2 * messages.length / 3);
 
