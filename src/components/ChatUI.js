@@ -107,6 +107,7 @@ class ChatUI extends Component {
                 key={rowData.index}
                 outOrIn={direction}
                 timestamp={timeStamp}
+                messageId={msg_id}
                 body={body}
                 navigation={navigation}
                 onResponse={this.onChatResponse}

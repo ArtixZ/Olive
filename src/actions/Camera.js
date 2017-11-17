@@ -58,11 +58,11 @@ export const selectImgOption = (option) => {
     }
 }
 
-export const selectFoodPortion = (portion) => {
+export const selectFoodPortion = (portion, messageId) => {
     return(dispatch, getState) => {
         dispatch({
             type: SELECT_FOOD_PORTION,
-            payload: portion
+            payload: {portion, messageId}
         })
     }
 }

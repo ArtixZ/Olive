@@ -15,12 +15,12 @@ class FoodClassOption extends Component {
     }
     onPressOK = () => {
         const { sliderValue } = this.state;
-        const { selectFoodPortion } = this.props;
-        selectFoodPortion(numeral(numeral(sliderValue).format('0.0')).value());
+        const { selectFoodPortion, messageId } = this.props;
+        selectFoodPortion(numeral(numeral(sliderValue).format('0.0')).value(), messageId);
     }
     
     render() {
-        const {option} = this.props;
+        const { option } = this.props;
         return (
             <View>
                 <View style={styles.txtContainerSty}>

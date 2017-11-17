@@ -192,9 +192,10 @@ export default (state = INIT_STATE, action) => {
                 }
             }]
         case SELECT_FOOD_PORTION:
-            const oldPayload = state[state.length - 1].body.payload;
-            const newPayload = Object.assign({portion: action.payload}, oldPayload);
-            state[state.length - 1].body.payload = newPayload;
+            const selected = state.find(i => i.msg_id === action.payload.messageId);
+            const oldPayload = selected.body.payload;
+            const newPayload = Object.assign({portion: action.payload.portion}, oldPayload);
+            selected.body.payload = newPayload;
             return [...state];
         default: 
             return state;

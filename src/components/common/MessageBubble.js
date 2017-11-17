@@ -12,7 +12,7 @@ import FoodClassOption from '../FoodClassOption';
 import ReportCard from '../ReportCard';
 import { respondTakenImg } from '../../actions/Camera';
 
-const MessageBubble = ({ outOrIn, timestamp, body, navigation, onResponse }) => {
+const MessageBubble = ({ outOrIn, timestamp, messageId, body, navigation, onResponse }) => {
 
     const { textStyle, dividerStyle, takenImgSty } = styles;
     const { type } = body;
@@ -95,6 +95,7 @@ const MessageBubble = ({ outOrIn, timestamp, body, navigation, onResponse }) => 
         case 'selectedImg':
             return (
                 <FoodClassOption 
+                    messageId={messageId}
                     option={body.payload}
                 />
             )
