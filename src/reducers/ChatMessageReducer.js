@@ -9,6 +9,7 @@ import {
     CAMERA_IMAGE_FOOD_IMG,
     SELECT_OPTION,
     SELECT_FOOD_PORTION,
+    DELETE_FOOD_PORTION,
 } from '../actions/types';
 
 import {data, IMAGES} from './data';
@@ -194,8 +195,15 @@ export default (state = INIT_STATE, action) => {
         case SELECT_FOOD_PORTION:
             const selected = state.find(i => i.msg_id === action.payload.messageId);
             const oldPayload = selected.body.payload;
-            const newPayload = Object.assign({portion: action.payload.portion}, oldPayload);
+            const newPayload = {...oldPayload, portion: action.payload.portion};
             selected.body.payload = newPayload;
+            return [...state];
+        case DELETE_FOOD_PORTION:
+            const messageId = action.payload;
+            const reselected = state.find(i => i.msg_id === messageId);
+            const oldPayload2 = reselected.body.payload;
+            const newPayload2 = {...oldPayload2, portion: null};
+            reselected.body.payload = newPayload2;
             return [...state];
         default: 
             return state;

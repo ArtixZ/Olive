@@ -4,6 +4,7 @@ import {
     TAKEN_IMAGE_RESPONSE_LOADING,
     SELECT_OPTION,
     SELECT_FOOD_PORTION,
+    DELETE_FOOD_PORTION,
  } from './types';
 
  import {
@@ -63,6 +64,14 @@ export const selectFoodPortion = (portion, messageId) => {
         dispatch({
             type: SELECT_FOOD_PORTION,
             payload: {portion, messageId}
+        })
+    }
+}
+export const deleteSelectedPortionById = (messageId) => {
+    return(dispatch) => {
+        dispatch({
+            type: DELETE_FOOD_PORTION,
+            payload: messageId
         })
     }
 }

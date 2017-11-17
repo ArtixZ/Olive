@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Slider } from 'react-native-elements'
 import numeral from 'numeral';
 
-import { selectFoodPortion } from '../actions';
+import { selectFoodPortion, deleteSelectedPortionById } from '../actions';
 
 class FoodClassOption extends Component {
     constructor(props) {
@@ -18,23 +18,29 @@ class FoodClassOption extends Component {
         const { selectFoodPortion, messageId } = this.props;
         selectFoodPortion(numeral(numeral(sliderValue).format('0.0')).value(), messageId);
     }
+    onReselect = () => {
+        const { deleteSelectedPortionById, messageId } = this.props;
+        deleteSelectedPortionById(messageId);
+    }
     
     render() {
         const { option } = this.props;
         return (
             <View>
-                <View style={styles.txtContainerSty}>
-                    <Text style={styles.textStyle}>
-                        {option.food_class}
-                    </Text>
-                    {
-                        option.portion ? 
-                        <Text style={styles.portionSubTxtSty}>
-                            {option.portion} serving(s)
+                <TouchableOpacity onPress={this.onReselect}>
+                    <View style={styles.txtContainerSty}>
+                        <Text style={styles.textStyle}>
+                            {option.food_class}
                         </Text>
-                        : null
-                    }
-                </View>
+                        {
+                            option.portion ? 
+                            <Text style={styles.portionSubTxtSty}>
+                                {option.portion} serving(s)
+                            </Text>
+                            : null
+                        }
+                    </View>
+                </TouchableOpacity>
                 {
                     !option.portion ?
                     <View style={styles.sliderContainerSty}>
@@ -151,5 +157,5 @@ const styles={
     }
 }
 
-export default connect(null, { selectFoodPortion })(FoodClassOption);
+export default connect(null, { selectFoodPortion, deleteSelectedPortionById })(FoodClassOption);
 
