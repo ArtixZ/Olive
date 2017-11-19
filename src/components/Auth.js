@@ -35,7 +35,7 @@ class AuthScreen extends Component {
   render() {
     switch(this.state.loggedIn) {
       case false:
-        return <LoginForm />
+        return <LoginForm {...this.props}/>
       default:
         return <Spinner />
     }

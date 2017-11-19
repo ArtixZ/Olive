@@ -13,13 +13,14 @@ class FoodDetail extends Component {
             return (<Header
                         outerContainerStyles={styles.headerSty}
                         leftComponent={<Icon 
+                                            containerStyle={styles.leftHeaderIconWrapper}                            
                                             name='chevron-left'
                                             type='entypo'
                                             color='#43496A'
                                             onPress={()=>{
                                                 routes = navigation.state.routes;
-                                                curRoute = routes[routes.length - 1]
-                                                navigation.goBack(curRoute.key)
+                                                curRoute = routes[routes.length - 1];
+                                                navigation.goBack(curRoute.key);
                                             }}
                                         />}
                         centerComponent={{ text: 'Food Profile', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
@@ -86,6 +87,12 @@ const styles = {
     headerSty: {
         backgroundColor: '#fff',
         position: 'relative'
+    },
+    leftHeaderIconWrapper: {
+        padding: 5, 
+        paddingLeft: 5, 
+        paddingRight: 5,
+        marginBottom: -6,
     },
     detailContainerSty: {
         backgroundColor: '#fff',

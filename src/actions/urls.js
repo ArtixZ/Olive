@@ -10,3 +10,8 @@ export const FOOD_DETAILS_FROM_KEYWORDS = {
     requestedType: ["food_details_from_keywords"],
     url: `${baseURL}/details`
 }
+
+export const CREATE_A_USER = {
+    requestedType: ["new_user_registration"],
+    url:`${baseURL}/event`
+}

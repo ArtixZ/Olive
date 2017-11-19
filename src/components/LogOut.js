@@ -1,9 +1,32 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text, Dimensions } from 'react-native';
+import { Button, Header, Icon } from 'react-native-elements';
 import firebase from 'firebase';
 
+const { width: SYSTEM_WIDTH } = Dimensions.get('window');
+
 export default class Logout extends Component {
+    static navigationOptions = {
+        header: ( {navigation} ) => {
+            return (
+            <Header
+                outerContainerStyles={styles.headerSty}
+                leftComponent={<Icon 
+                                    containerStyle={styles.leftHeaderIconWrapper}
+                                    name='chevron-left'
+                                    type='entypo'
+                                    color='#43496A'
+                                    onPress={()=>{
+                                        routes = navigation.state.routes;
+                                        curRoute = routes[routes.length - 1];
+                                        navigation.goBack(curRoute.key);
+                                    }}
+                                />}
+                centerComponent={<View style={styles.headerTxtWrapper}><Text style={{fontFamily: 'System',color: '#43496A',fontSize: 20}}>Olive</Text></View>}
+            />)
+        }
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -56,4 +79,31 @@ export default class Logout extends Component {
             </View>
         )
     }
+}
+
+const styles = {
+    headerSty: {
+        position: 'relative',
+        backgroundColor: '#F5F5F5',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.3,
+        elevation: 1,
+    },
+    leftHeaderIconWrapper: {
+        padding: 5, 
+        paddingLeft: 5, 
+        paddingRight: 5,
+        marginBottom: -6,
+    },
+    headerTxtWrapper: {
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: SYSTEM_WIDTH * 0.4,
+        height: '100%',
+        borderColor: '#5C6BC0',
+        borderBottomWidth:2,
+        marginBottom: -10
+    },
 }

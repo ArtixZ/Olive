@@ -34,13 +34,19 @@ class ChatUI extends Component {
         <Header
           outerContainerStyles={styles.headerSty}
           leftComponent={<Icon 
+                            containerStyle={styles.leftHeaderIconWrapper}
                             name='user'
                             type='font-awesome'
                             color='#43496A'
                             onPress={()=>{navigation.navigate('logOut')}}
-                           />}
+                        />}
           centerComponent={<View style={styles.headerTxtWrapper}><Text style={{fontFamily: 'System',color: '#43496A',fontSize: 20}}>Olive</Text></View>}
-          rightComponent={{ icon: 'heart', type: 'entypo', color: '#43496A' }}
+          rightComponent={<Icon 
+                            containerStyle={styles.rightHeaderIconWrapper}
+                            name='heart'
+                            type='entypo'
+                            color='#43496A'
+                          />}
         />)
     }
   }
@@ -170,6 +176,18 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.3,
     elevation: 1,
+  },
+  leftHeaderIconWrapper: {
+    padding: 5, 
+    paddingLeft: 5, 
+    paddingRight: 5,
+    marginBottom: -4,
+  },
+  rightHeaderIconWrapper: {
+    padding: 5, 
+    paddingLeft: 5, 
+    paddingRight: 5,
+    marginBottom: -7,
   },
   headerTxtWrapper: {
     flex:1,

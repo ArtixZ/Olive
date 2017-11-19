@@ -11,13 +11,14 @@ import {
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, signupUser } from '../actions';
 import { Spinner, Input } from './common';
 
-class LoginForm extends Component {
+class Signup extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: '',
   }
 
   onEmailChange(text) {
@@ -28,17 +29,16 @@ class LoginForm extends Component {
     this.setState({password: text});
   }
 
-  onLoginButtonPress() {
-    const { email, password } = this.state;
-
-    this.props.loginUser({ email, password });
+  onConfirmPasswordChange(text) {
+    this.setState({confirmPassword: text});    
   }
 
   onSignupButtonPress() {
-    const { navigation } = this.props;
-    console.log(navigation);
-    navigation.navigate('signUp');
+    const { email, password } = this.state;
+
+    this.props.signupUser({ email, password });
   }
+
 
   render() {
     return (
@@ -72,9 +72,22 @@ class LoginForm extends Component {
           enablesReturnKeyAutomatically
           onChangeText={this.onPasswordChange.bind(this)}
           value={this.state.password}
-          returnKeyType="done"
-          onSubmitEditing={() => this.onLoginButtonPress()}
+          returnKeyType="next"
+          onSubmitEditing={() => this.confirmPasswordInputArea.focus()}
           ref={ ref => this.passwordInputArea = ref}
+        />
+        <TextInput
+            style={styles.inputSty}
+            secureTextEntry
+            label="Confirm Password"
+            placeholder="confirm password"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            enablesReturnKeyAutomatically
+            onChangeText={this.onConfirmPasswordChange.bind(this)}
+            value={this.state.confirmPassword}
+            returnKeyType="done"
+            onSubmitEditing={() => this.onSignupButtonPress()}
+            ref={ ref => this.confirmPasswordInputArea = ref}
         />
         {
           this.props.error ?
@@ -87,18 +100,6 @@ class LoginForm extends Component {
         {
           this.props.loading ? 
           <Spinner size="large" />
-          : 
-          <TouchableOpacity 
-            style={styles.loginBtnContainerSty}
-            onPress={this.onLoginButtonPress.bind(this)}
-          >
-            <Text style={styles.btnTextSty}>LOGIN</Text>
-          </TouchableOpacity>
-        }
-
-        {
-          this.props.loading ? 
-          null
           : 
           <TouchableOpacity 
             style={styles.signupBtnContainerSty}
@@ -136,7 +137,7 @@ const styles = {
     paddingHorizontal: 10,
     marginBottom: 20
   },
-  loginBtnContainerSty: {
+  signupBtnContainerSty: {
     backgroundColor: '#3F51B5',
     paddingVertical: 15
   },
@@ -152,10 +153,10 @@ const styles = {
   }
 };
 
-const mapStateToProps = ({ auth }) => {
-  const { error, loading } = auth;
+const mapStateToProps = ({ signup }) => {
+  const { error, loading } = signup;
 
   return { error, loading };
 };
 
-export default connect(mapStateToProps, { loginUser })(LoginForm);
+export default connect(mapStateToProps, { signupUser })(Signup);

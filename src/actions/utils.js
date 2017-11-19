@@ -29,7 +29,7 @@ export const callAPI = async (method, {requestedType, url}, data) => {
     const location = await Location.getCurrentPositionAsync({});
 
     data["requested_types"] = requestedType;
-    data = {...data, ...location, user_info: userInfo};
+    data = {...data, ...location, userInfo};
     
     return fetch(url, {
         method: method,

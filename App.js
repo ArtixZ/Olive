@@ -11,6 +11,7 @@ import ChatUI from './src/components/ChatUI';
 import FoodDetail from './src/components/FoodDetail';
 import PreloadHOC from './src/components/PreloadHOC';
 import LogOut from './src/components/LogOut';
+import SignUp from './src/components/SignUp';
 
 class App extends Component {
   state = { loggedIn: null };
@@ -26,10 +27,11 @@ class App extends Component {
       main: {
         screen: StackNavigator({
           chatUI: {screen: ChatUI},
-          foodDetail: {screen: FoodDetail}
+          foodDetail: {screen: FoodDetail},
+          logOut: {screen: LogOut},
         })
       },
-      logOut: {screen: LogOut},
+      signUp: {screen: SignUp},
     }, {
       navigationOptions: {
         tabBarVisible: false
