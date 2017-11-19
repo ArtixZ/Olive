@@ -34,10 +34,10 @@ class ChatUI extends Component {
         <Header
           outerContainerStyles={styles.headerSty}
           leftComponent={<Icon 
-                            name='menu'
-                            type='entypo'
+                            name='user'
+                            type='font-awesome'
                             color='#43496A'
-                            onPress={()=>console.log(navigation)}
+                            onPress={()=>{navigation.navigate('logOut')}}
                            />}
           centerComponent={<View style={styles.headerTxtWrapper}><Text style={{fontFamily: 'System',color: '#43496A',fontSize: 20}}>Olive</Text></View>}
           rightComponent={{ icon: 'heart', type: 'entypo', color: '#43496A' }}
