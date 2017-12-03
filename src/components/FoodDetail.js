@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, Dimensions } from 'react-native';
+import { View, Image, Text, Dimensions, Linking } from 'react-native';
 import { Rating, Button, Header, Icon } from 'react-native-elements';
 import numeral from 'numeral';
 
@@ -30,6 +30,18 @@ class FoodDetail extends Component {
     constructor(props) {
         super(props);
     }
+
+    onHaveIt = () => {
+        const url = 'https://www.ubereats.com/boston/food-delivery/djs-market-&-deli/kNjGMGsXSCqrfgQPcU29Lw/';
+        Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                console.log('Can\'t handle url: ' + url);
+            } else {
+                return Linking.openURL(url);
+            }
+        }).catch(err => console.error('An error occurred', err));
+    }
+
     render() {
         const ingredients = {Calories: 19, Fat: 22, Sodium: 31, Carbs: 13, Sugars: 17, Protein: 17}
 
@@ -76,7 +88,9 @@ class FoodDetail extends Component {
                         iconRight
                         backgroundColor={'#42A5F5'}
                         icon={{name: 'local-cafe'}}
-                        title='HAVE IT' />
+                        title='HAVE IT' 
+                        onPress={this.onHaveIt}
+                    />
                 </View>
             </View>
         )
