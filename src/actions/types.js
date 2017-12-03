@@ -16,14 +16,15 @@ export const FOOD_CLASS = 'FOOD_CLASS';
 export const TAKEN_IMAGE = 'TAKEN_IMAGE';
 export const CAMERA_IMAGE_URI = 'CAMERA_IMAGE_URI';
 export const CAMERA_IMAGE_FOOD_IMG = 'CAMERA_IMAGE_FOOD_IMG';
-export const TAKEN_IMAGE_RESPONSE_LOADING = 'TAKEN_IMAGE_RESPONSE_LOADING';
+export const LOADING_RESPONSE_MESSAGE = 'LOADING_RESPONSE_MESSAGE';
 export const SELECT_OPTION = 'SELECT_OPTION';
 export const SELECT_FOOD_PORTION = 'SELECT_FOOD_PORTION';
 export const DELETE_FOOD_PORTION = 'DELETE_FOOD_PORTION';
 
 /*--------------- recommendation ---------------------*/
 
-export const GET_FOOD_DETAILS = 'GET_FOOD_DETAILS';
+export const GET_FOOD_INITIAL_RECOMMENDATIONS = 'GET_FOOD_INITIAL_RECOMMENDATIONS';
+export const GET_FOOD_RECOMMENDATIONS = 'GET_FOOD_RECOMMENDATIONS';
 
 /*--------------- signup ---------------------*/
 

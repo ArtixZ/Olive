@@ -39,6 +39,10 @@ class Signup extends Component {
     this.props.signupUser({ email, password });
   }
 
+  onBackButtonPress() {
+    const { navigation } = this.props;
+    navigation.navigate('auth');
+  }
 
   render() {
     return (
@@ -110,8 +114,17 @@ class Signup extends Component {
         }
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>      
-          <View flex={1} />
+          <View flex={0.5} />
         </TouchableWithoutFeedback>
+
+        <TouchableOpacity 
+          style={styles.backBtnContainerSty}
+          onPress={this.onBackButtonPress.bind(this)}
+        >
+          <View flex={0.5}>
+            <Text style={styles.btnTextSty}>Back</Text>
+          </View>
+        </TouchableOpacity>
 
       </KeyboardAvoidingView>
     );
@@ -138,10 +151,6 @@ const styles = {
     marginBottom: 20
   },
   signupBtnContainerSty: {
-    backgroundColor: '#3F51B5',
-    paddingVertical: 15
-  },
-  signupBtnContainerSty: {
     marginTop: 4,
     backgroundColor: '#1E88E5',
     paddingVertical: 15
@@ -150,6 +159,10 @@ const styles = {
     textAlign: 'center',
     color: '#FFFFFF',
     fontWeight: '700'
+  },
+  backBtnContainerSty: {
+    backgroundColor: '#C5CAE9',
+    paddingVertical: 15
   }
 };
 

@@ -1,7 +1,7 @@
 import { 
     CAMERA_IMAGE_URI,
     CAMERA_IMAGE_FOOD_IMG,
-    TAKEN_IMAGE_RESPONSE_LOADING,
+    LOADING_RESPONSE_MESSAGE,
     SELECT_OPTION,
     SELECT_FOOD_PORTION,
     DELETE_FOOD_PORTION,
@@ -20,7 +20,7 @@ export const selectCameraImg = (image) => {
         if (image.uri) {
             dispatch(cameraImg(image));
             dispatch(takenPic(image.uri));
-            dispatch({type: TAKEN_IMAGE_RESPONSE_LOADING});
+            dispatch({type: LOADING_RESPONSE_MESSAGE});
             const data = {'image': image.base64};
             
             callAPI('POST', FOOD_CLASS_FROM_IMAGE, data)
@@ -38,7 +38,7 @@ export const respondTakenImg = () => {
     return (dispatch, getState) => {
         const {cameraImg} = getState();
 
-        dispatch({type: TAKEN_IMAGE_RESPONSE_LOADING})
+        dispatch({type: LOADING_RESPONSE_MESSAGE})
             
         const data = {'image': cameraImg.takenImg.base64};
         

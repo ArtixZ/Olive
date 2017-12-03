@@ -10,6 +10,10 @@ export function phraseParser(msg) {
         return {
             renderReport: true
         }
+    } else {
+        return {
+            keyword: msg
+        }
     }
     // const neg = msgAry.filter( item => negtiveSet.includes(item.toLowerCase()) );
     // const pos = msgAry.filter( item => positiveSet.includes(item.toLowerCase()) );

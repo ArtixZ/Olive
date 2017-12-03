@@ -21,7 +21,7 @@ import { ImagePicker } from 'expo';
 
 // import Header from './Header';
 import { MessageBubble, ReversedList } from './common';
-import { sendMessage, getResponse, selectCameraImg, getRecommendation, respondTakenImg } from '../actions';
+import { sendMessage, getResponse, selectCameraImg, getInitRecommendation, respondTakenImg } from '../actions';
 
 const TITLE = 'ChatForFood';
 
@@ -62,8 +62,8 @@ class ChatUI extends Component {
   }
 
   componentWillMount() {
-    const { getRecommendation } = this.props;
-    getRecommendation();
+    const { getInitRecommendation } = this.props;
+    getInitRecommendation();
   }
 
   componentWillUpdate (nextProps, nextState) {
@@ -270,7 +270,7 @@ export default connect(mapStateToProps, {
   sendMessage, 
   getResponse, 
   selectCameraImg, 
-  getRecommendation, 
+  getInitRecommendation, 
   respondTakenImg
 })(ChatUI);
 // export default connect(mapStateToProps, {sendMessage, getResponse})((ChatUI));

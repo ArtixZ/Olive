@@ -19,9 +19,11 @@ const MessageBubble = ({ outOrIn, timestamp, messageId, body, navigation, onResp
     const leftOrRight = outOrIn === 'outgoing' ? 'flex-end' : 'flex-start';
     switch (type) {
         case 'txt': 
+            let mTop = { marginTop: 0 };
+            if(outOrIn === 'outgoing') mTop = { marginTop: 30 };
             return (
                 <Text
-                    style={{ ...textStyle, alignSelf: leftOrRight }}
+                    style={{ ...textStyle, alignSelf: leftOrRight, ...mTop }}
                 >
                     {body.msg}
                 </Text>
@@ -118,7 +120,6 @@ const styles = {
     },
     textStyle: {
         alignItems:'center',
-        marginTop: 10,
         marginLeft:30,
         marginRight:30,        
         minHeight: 40,

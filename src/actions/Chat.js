@@ -3,9 +3,15 @@ import {
     TXT_RESPONSE_MESSAGE,
     FOOD_CLASS,
     TAKEN_IMAGE,
-    RESPOND_TAKEN_PIC    
+    RESPOND_TAKEN_PIC,
+    LOADING_RESPONSE_MESSAGE,    
+    GET_FOOD_RECOMMENDATIONS,
 } from './types';
 import {phraseParser} from '../utils/PhraseParser';
+import { callAPI } from './utils';
+import {
+    FOOD_DETAILS_FROM_KEYWORDS
+} from './urls';
 
 export const sendMessage = (message) => {
     // return {
@@ -14,7 +20,7 @@ export const sendMessage = (message) => {
     // };
     return (dispatch, getState) => {
         dispatch(renderInput(message));
-        dispatch(getResponse(message));
+        getResponse(dispatch, message);
     }
 };
 
@@ -25,14 +31,31 @@ const renderInput = (message) => {
     }
 }
 
-const getResponse = (message) => {
+const getResponse = (dispatch, message) => {
     const response = phraseParser(message);
-
-    return {
-        type: TXT_RESPONSE_MESSAGE,
-        payload: response
-    };
+    if (response.renderReport) {
+        return dispatch({
+            type: TXT_RESPONSE_MESSAGE,
+            payload: response
+        });
+    } else {
+        dispatch({type: LOADING_RESPONSE_MESSAGE});
+        const data = {"keyword": response.keyword};
+        
+        callAPI( 'POST', FOOD_DETAILS_FROM_KEYWORDS, data)
+        .then( res => {
+            dispatch(foodRecommendations(res[FOOD_DETAILS_FROM_KEYWORDS.requestedType[0]]))
+        })
+    }
+    
 };
+
+const foodRecommendations = (details) => {
+    return {
+        type: GET_FOOD_RECOMMENDATIONS,
+        payload: details
+    }
+}
 
 export const sendFoodClass = (imgURI, imgBase64, foodClass) => {
     return {

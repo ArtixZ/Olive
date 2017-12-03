@@ -3,9 +3,10 @@ import {
     TXT_CHAT_MESSAGE,
     TXT_RESPONSE_MESSAGE,
     FOOD_CLASS,
-    GET_FOOD_DETAILS,
+    GET_FOOD_INITIAL_RECOMMENDATIONS,
+    GET_FOOD_RECOMMENDATIONS,
     TAKEN_IMAGE,
-    TAKEN_IMAGE_RESPONSE_LOADING,
+    LOADING_RESPONSE_MESSAGE,
     CAMERA_IMAGE_FOOD_IMG,
     SELECT_OPTION,
     SELECT_FOOD_PORTION,
@@ -124,7 +125,7 @@ export default (state = INIT_STATE, action) => {
             return [...state, message];
         case TXT_RESPONSE_MESSAGE:
 
-            const {positive, something, renderReport} = action.payload;
+            const {keyword, renderReport} = action.payload;
             if(renderReport) {
                 return [...state, 
                     {
@@ -149,6 +150,7 @@ export default (state = INIT_STATE, action) => {
             }
 
             const txtMessage = generateTxtResponse(positive, something);
+            // const txtMessage = generateTxtResponse(positive, something);
             const cardMessage = generateCardResponse(PAYLOADS, positive, something);
             if(cardMessage) {
                 const divider = generateDivider();
@@ -159,15 +161,26 @@ export default (state = INIT_STATE, action) => {
         case FOOD_CLASS: 
             const foodClassMessage = generateFoodClassMsg(action.payload);
             return [...state, foodClassMessage]
-        case GET_FOOD_DETAILS: 
-            console.log(action.payload);
+        case GET_FOOD_INITIAL_RECOMMENDATIONS: 
             const initialMsgs = generateInitMsgs(action.payload);
-            return initialMsgs
-
+            return initialMsgs;
+        case GET_FOOD_RECOMMENDATIONS: 
+            const recommendFoods = generateInitMsgs(action.payload);
+            state.pop();            
+            return [...state,
+                {
+                    msg_id: `temp_${generateGuuId()}`,
+                    timeStamp: moment().toISOString(),
+                    direction: 'ingoing',
+                    body: {
+                        type: 'txt',
+                        msg: "Here are some recommendations"
+                    }
+                }, ...recommendFoods];
         case TAKEN_IMAGE:
             const takenPic = generateTakenPic(action.payload)
             return [...state, takenPic]
-        case TAKEN_IMAGE_RESPONSE_LOADING:
+        case LOADING_RESPONSE_MESSAGE:
             return [...state, {
                 msg_id: `temp_${generateGuuId()}`,
                 timeStamp: moment().toISOString(),
