@@ -31,8 +31,9 @@ class FoodDetail extends Component {
         super(props);
     }
 
-    onHaveIt = () => {
-        const url = 'https://www.ubereats.com/boston/food-delivery/djs-market-&-deli/kNjGMGsXSCqrfgQPcU29Lw/';
+    onHaveIt = (restaurantDetail) => {
+        const { restaurant_id } = restaurantDetail;
+        const url = `https://www.ubereats.com/boston/food-delivery/${restaurant_id}`;
         Linking.canOpenURL(url).then(supported => {
             if (!supported) {
                 console.log('Can\'t handle url: ' + url);
@@ -49,7 +50,7 @@ class FoodDetail extends Component {
         
         const { navigation } = this.props;
         const { foodInfo } = navigation.state.params;
-        const { pic, name, restaurantName, highlights, rating, tags, distance, price } = foodInfo;
+        const { pic, name, restaurantName, restaurantDetail, highlights, rating, tags, distance, price } = foodInfo;
         return(
             <View style = {detailContainerSty}>
                 
@@ -89,7 +90,7 @@ class FoodDetail extends Component {
                         backgroundColor={'#42A5F5'}
                         icon={{name: 'local-cafe'}}
                         title='HAVE IT' 
-                        onPress={this.onHaveIt}
+                        onPress={()=>this.onHaveIt(restaurantDetail)}
                     />
                 </View>
             </View>
