@@ -26,9 +26,9 @@ const CardWrapper = ({ thumbnail_image, foodName, restaurantName, tags, suggesti
 
                     <View flex={2} flexDirection={'column'}>
                         <View style={contentContainerStyle}>
-                            <Text style={{fontFamily: 'System', fontSize: 17}}>{foodName}</Text>
+                            <Text style={{fontFamily: 'System', fontWeight: '600', fontSize: 17}}>{foodName}</Text>
                             <Text style={{fontSize: 15}}>{restaurantName}</Text>                            
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+                            {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                                 <Rating
                                     type='custom'
                                     ratingImage={require('../../assets/pics/rating_dot_grey.png')}
@@ -41,9 +41,10 @@ const CardWrapper = ({ thumbnail_image, foodName, restaurantName, tags, suggesti
                                 />
                                 <Text style={{color:'#979797', fontSize: 11}}>{`${numeral(rating).format('0.0')}/5.0`}</Text>
                             </View>
+                            */}  
                             <Text style={{color:'#979797', fontSize: 11}}>{`${numeral(distance).format('0.0')} miles`}</Text>                            
-                            <Text style={{textAlign:'center'}}>{highlights.toString()}</Text>
-                            <Text style={{color:'black'}}>{`$${price}`}</Text>                            
+                            <Text style={{textAlign:'center', fontStyle: 'italic'}}>{highlights.toString()}</Text>
+                            <Text style={{color:'black'}}>{`${price}`}</Text>                            
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -59,18 +60,19 @@ const styles = {
         paddingRight: 4,
         marginLeft:5,
         marginRight:5,
+        marginTop: 5,
+        marginBottom: 5,
         ...Platform.select({
             ios: {
                 borderWidth: 1,
                 borderRadius: 2,
                 borderColor: '#ddd',
                 borderBottomWidth: 0,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 2,
+                shadowColor: 'rgba(32, 33, 36, 0.28)',
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.28,
+                shadowRadius: 6,
                 elevation: 1,
-                marginTop: 10,
             },
             android: {
                 elevation: 1,
@@ -94,6 +96,7 @@ const styles = {
     },
     contentContainerStyle: {
         flex: 1,
+        margin: 4,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-around'
@@ -102,7 +105,7 @@ const styles = {
         flex: 1,
         width: null,
         height: null,
-        resizeMode: 'cover',
+        // resizeMode: 'cover',
     },
     thumbnailContainerStyle: {
         flex: 1,

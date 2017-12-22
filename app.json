@@ -9,7 +9,7 @@
   "expo": {
    "name": "Olive",
    "icon": "./src/assets/pics/Icon_Blue@2x.png",
-   "version": "0.0.3",
+   "version": "0.0.5",
    "slug": "Olive",
    "sdkVersion": "19.0.0",
    "ios": {

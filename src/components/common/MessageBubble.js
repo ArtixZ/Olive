@@ -97,6 +97,7 @@ const MessageBubble = ({ outOrIn, timestamp, messageId, body, navigation, onResp
         case 'selectedImg':
             return (
                 <FoodClassOption 
+                    navigation={navigation}                
                     messageId={messageId}
                     option={body.payload}
                 />

@@ -9,6 +9,7 @@ import reducers from './src/reducers';
 import Auth from './src/components/Auth';
 import ChatUI from './src/components/ChatUI';
 import FoodDetail from './src/components/FoodDetail';
+import NutritionDetails from './src/components/NutritionDetails';
 import PreloadHOC from './src/components/PreloadHOC';
 import LogOut from './src/components/LogOut';
 import SignUp from './src/components/SignUp';
@@ -28,6 +29,7 @@ class App extends Component {
         screen: StackNavigator({
           chatUI: {screen: ChatUI},
           foodDetail: {screen: FoodDetail},
+          nutritionDetails: {screen: NutritionDetails},
           logOut: {screen: LogOut},
         })
       },

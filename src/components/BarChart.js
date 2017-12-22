@@ -5,6 +5,8 @@ import {
     View,
     Text,
 } from 'react-native';
+import numeral from 'numeral';
+import { standardNutrition } from './_data';
 
 class BarChart extends Component {
     constructor(props) {
@@ -12,24 +14,28 @@ class BarChart extends Component {
         this.state = {};
         const { ingredients } = props;
         // init ingredients
-        Object.keys(ingredients).forEach( ing => {
+        Object.keys(standardNutrition).forEach( ing => {
             this.state[ing] = new Animated.Value(0);
         })
     }
 
     componentDidMount () {
         const { ingredients } = this.props;
-        const width = this.getWidth(ingredients);
+        const percentage = {};
+        for(let item in standardNutrition) {
+            percentage[item] = ingredients[item.toLowerCase()] / standardNutrition[item];
+        }
+        const width = this.getWidth(percentage);
         
-        Animated.parallel(Object.keys(ingredients).map(item => Animated.timing(
+        Animated.parallel(Object.keys(standardNutrition).map(item => Animated.timing(
             this.state[item], {toValue: width[item], duration: 500}))).start();
     }
 
     getWidth (percentages) {
-        const deviceWidth = Dimensions.get('window').width
+        const deviceWidth = Dimensions.get('window').width;
         let widthAry = {};
         Object.keys(percentages).forEach( element => {
-            let width = percentages[element]*0.01*deviceWidth*0.5;
+            let width = percentages[element] * deviceWidth * 0.5;
             widthAry[element] = width;
         }); 
 
@@ -42,14 +48,14 @@ class BarChart extends Component {
         return(
             <View style={{flex: 1}}>
                 
-                {Object.keys(ingredients).map( (ing, i) => 
+                {Object.keys(standardNutrition).map( (ing, i) => 
                     <View key={i} style={{flex: 1, flexDirection: 'row'}}>
-                        <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
+                        <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
                             <Text style={{flex: 1}}>{ing}</Text>
                         </View>
                         <View style={{flex: 5, flexDirection: 'row'}}>
                             <Animated.View style={[styles.bar, styles[ing], {width: this.state[ing]}]}/>
-                            <Text>{`${ingredients[ing]}%`}</Text>
+                            <Text>{`${numeral(ingredients[ing.toLowerCase()]/standardNutrition[ing]).format('0.0')}%`}</Text>
                         </View>
                     </View>
                 )}
@@ -62,22 +68,29 @@ const styles = {
         alignSelf: 'flex-start',
         borderRadius: 5,
         height: 10,
-        marginRight: 5
+        marginRight: 5,
+        marginTop: 4,
     },
     Calories: {
         backgroundColor: '#F55443'
     },
     Fat: {
-        backgroundColor: '#FCBD24'
+        backgroundColor: '#0D47A1'
     }, 
+    Fiber: {
+        backgroundColor: '#FCBD24'        
+    },
     Sodium: {
         backgroundColor: '#59838B'
     },
-    Carbs: {
+    Carbohydrate: {
         backgroundColor: '#4D98E4'
     },
     Sugars: {
         backgroundColor: '#418E50'
+    },
+    Saturated: {
+        backgroundColor: '#039BE5'
     },
     Protein: {
         backgroundColor: '#7B7FEC'

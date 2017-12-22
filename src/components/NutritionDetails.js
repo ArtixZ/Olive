@@ -44,56 +44,25 @@ class FoodDetail extends Component {
     }
 
     render() {
-        // const ingredients = {Calories: 19, Fat: 22, Sodium: 31, Carbs: 13, Sugars: 17, Protein: 17}
+        const ingredients = {Calories: 19, Fat: 22, Sodium: 31, Carbs: 13, Sugars: 17, Protein: 17}
 
         const { thumbnailStyle, thumbnailContainerStyle, contentContainerStyle, detailContainerSty, foodInfoSty, abstractSty, ingredientSty, actionSty } = styles;
         
-        const { navigation } = this.props;
-        const { foodInfo } = navigation.state.params;
-        const { pic, name, restaurantName, restaurantDetail, highlights, rating, tags, distance, price, nutrition: ingredients } = foodInfo;
+        // const { navigation } = this.props;
+        // const { foodInfo } = navigation.state.params;
+        // const { pic, name, restaurantName, restaurantDetail, highlights, rating, tags, distance, price } = foodInfo;
         return(
             <View style = {detailContainerSty}>
                 
-                <View style = {foodInfoSty}>
-                    <View style={thumbnailContainerStyle}>
-                        <Image
-                            style={thumbnailStyle}
-                            source={{uri: pic}}
-                        />
-                    </View>
-                    <View style={contentContainerStyle}>
-                        <Text style={{fontWeight: 'bold', fontSize: 17}}>{name}</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Text>{restaurantName}</Text>
-                        </View>
-                        <Text style={{color:'grey'}}>{`${numeral(distance).format('0.0')} mi`}</Text>
-                        <Rating
-                            imageSize={20}
-                            readonly
-                            startingValue={rating}
-                        />
-                        <Text style={{textAlign:'center'}}>{highlights.toString()}</Text>
-                    </View>
-                    <View style = {abstractSty}>
-                        <Text>This is a bowl of lively salad of grilled chicken. </Text>
-                    </View>
-                </View>
+                <View style={{flex: 4}} />
                 <View style = {ingredientSty}>
                     <BarChart
                         ingredients = {ingredients}
                     />
                 </View>
 
-                <View style = {actionSty}>
-                    <Button
-                        large
-                        iconRight
-                        backgroundColor={'#42A5F5'}
-                        icon={{name: 'local-cafe'}}
-                        title='HAVE IT' 
-                        onPress={()=>this.onHaveIt(restaurantDetail)}
-                    />
-                </View>
+                <View style={{flex: 4}} />
+                
             </View>
         )
     }
@@ -117,17 +86,16 @@ const styles = {
     foodInfoSty: {
         marginLeft: 10,
         marginRight: 10,
-        flex: 5,
+        flex: 7,
         flexDirection: 'column'
     },
     ingredientSty: {
-        flex: 5,
+        flex: 4,
     },
     abstractSty: {
         marginLeft: 10,
         marginRight: 10,
-        marginBottom: 10,
-        flex: 0.8,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -145,7 +113,7 @@ const styles = {
         flex: 1,
         width: null,
         height: null,
-        // resizeMode: 'cover',
+        resizeMode: 'cover',
         borderRadius: 10,
         height: SCREEN_WIDTH*0.7,
         width: SCREEN_WIDTH*0.8
@@ -153,7 +121,6 @@ const styles = {
     contentContainerStyle: {
         flex: 2,
         marginLeft:35,
-        marginTop: 10,
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'flex-start',

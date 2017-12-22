@@ -35,16 +35,17 @@ class ChatUI extends Component {
           outerContainerStyles={styles.headerSty}
           leftComponent={<Icon 
                             containerStyle={styles.leftHeaderIconWrapper}
-                            name='user'
-                            type='font-awesome'
+                            name='grabber'
+                            type='octicon'
+                            size={30}
                             color='#43496A'
                             onPress={()=>{navigation.navigate('logOut')}}
                         />}
           centerComponent={<View style={styles.headerTxtWrapper}><Text style={{fontFamily: 'System',color: '#43496A',fontSize: 20}}>Olive</Text></View>}
           rightComponent={<Icon 
                             containerStyle={styles.rightHeaderIconWrapper}
-                            name='heart'
-                            type='entypo'
+                            name='graph'
+                            type='octicon'
                             color='#43496A'
                           />}
         />)
@@ -171,23 +172,25 @@ class ChatUI extends Component {
 const styles = StyleSheet.create({
   headerSty: {
     position: 'relative',
-    backgroundColor: '#F5F5F5',
+    // backgroundColor: '#F5F5F5',
+    backgroundColor: 'white',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 0.5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.5,
     elevation: 1,
   },
   leftHeaderIconWrapper: {
     padding: 5, 
     paddingLeft: 5, 
     paddingRight: 5,
-    marginBottom: -4,
+    marginBottom: -17,
   },
   rightHeaderIconWrapper: {
     padding: 5, 
     paddingLeft: 5, 
     paddingRight: 5,
-    marginBottom: -7,
+    marginBottom: -12,
   },
   headerTxtWrapper: {
     flex:1,
@@ -226,13 +229,14 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   footer: {
-    marginTop: 8,
+    // marginTop: 3,
     height: 50,    
     flexDirection: 'row',
     backgroundColor: 'white',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: -1 },
-    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: -0.5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.5,
     elevation: 1,
   },
   camera: {

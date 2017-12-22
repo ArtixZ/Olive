@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { Slider } from 'react-native-elements'
+import { Slider, Icon } from 'react-native-elements'
 import numeral from 'numeral';
 
 import { selectFoodPortion, deleteSelectedPortionById } from '../actions';
@@ -22,25 +22,47 @@ class FoodClassOption extends Component {
         const { deleteSelectedPortionById, messageId } = this.props;
         deleteSelectedPortionById(messageId);
     }
+    onPortion = () => {
+        this.props.navigation.navigate('nutritionDetails');
+    }
     
     render() {
         const { option } = this.props;
         return (
             <View>
-                <TouchableOpacity onPress={this.onReselect}>
-                    <View style={styles.txtContainerSty}>
-                        <Text style={styles.textStyle}>
-                            {option.food_class}
-                        </Text>
-                        {
-                            option.portion ? 
-                            <Text style={styles.portionSubTxtSty}>
-                                {option.portion} serving(s)
-                            </Text>
+                <View style={styles.containerSty}>
+                    {
+                        option.portion ?
+                            <TouchableOpacity onPress={this.onPortion}>
+                                <View style={styles.iconContainerSty}>
+                                    <Icon 
+                                        type="octicon"
+                                        name="graph"
+                                    />
+                                </View>
+                            </TouchableOpacity>
                             : null
-                        }
-                    </View>
-                </TouchableOpacity>
+                    }
+                    <TouchableOpacity onPress={this.onReselect}>
+                        <View style={styles.txtContainerSty}>
+                            <Text style={styles.textStyle}>
+                                {option.food_class}
+                            </Text>
+                            {
+                                option.portion ? 
+                                <View>
+                                    <Text style={styles.portionSubTxtSty}>
+                                        {option.portion} serving(s)
+                                    </Text>
+                                    <Text style={styles.tapToEdit}>
+                                        tap to edit
+                                    </Text>
+                                </View>
+                                : null
+                            }
+                        </View>
+                    </TouchableOpacity>
+                </View>
                 {
                     !option.portion ?
                     <View style={styles.sliderContainerSty}>
@@ -75,6 +97,15 @@ class FoodClassOption extends Component {
 }
 
 const styles={
+    containerSty: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+    },
+    iconContainerSty: {
+        marginRight: 25,
+        alignSelf: 'flex-end',
+    },
     txtContainerSty: {
         padding: 10,
         marginRight: 25,
@@ -98,6 +129,10 @@ const styles={
         alignSelf: 'center',
         color: '#373850',
         fontSize: 16,
+    },
+    tapToEdit: {
+        alignSelf: 'flex-end',
+        color: '#BDBDBD',
     },
     sliderContainerSty: {
         flexDirection: 'row',

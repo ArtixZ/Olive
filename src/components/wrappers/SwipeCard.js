@@ -49,14 +49,13 @@ export default class extends Component {
                     showsPagination={false}
                     containerStyle={styles.wrapper}
                     bounces
-                    autoplay
-                    autoplayTimeout={30}
+                    
                     height={170}
                     loop={false}
                 >
                     {
                         cards.map((card, i) => {
-                            let { image_uri: pic, food_name: name, restaurant_detail: restaurantDetail, restaurant_detail:{restaurant_name: restaurantName, restaurant_cuisine: highlights}, tags, distance = 3, suggestion, food_rating: rating, price = 12 } = card;
+                            let { image_uri: pic, food_name: name, restaurant_detail: restaurantDetail, restaurant_detail:{restaurant_name: restaurantName, restaurant_cuisine: highlights}, tags, distance = 3, suggestion, food_rating: rating = 0, price = 12, nutrition } = card;
                             pic = `${photoURL}/${pic}`;
                             return (<CardWrapper
                                         key={i}
@@ -69,7 +68,7 @@ export default class extends Component {
                                         suggestion={suggestion}
                                         rating={rating}
                                         price={price}
-                                        onCardPress={this.onCardPress.bind(this, { pic, name, restaurantDetail, restaurantName, highlights, tags, distance, suggestion, rating, price })}
+                                        onCardPress={this.onCardPress.bind(this, { pic, name, restaurantDetail, restaurantName, highlights, tags, distance, suggestion, rating, price, nutrition })}
                                     />)
                             })
                     }
