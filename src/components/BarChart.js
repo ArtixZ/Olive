@@ -35,7 +35,7 @@ class BarChart extends Component {
         const deviceWidth = Dimensions.get('window').width;
         let widthAry = {};
         Object.keys(percentages).forEach( element => {
-            let width = percentages[element] * deviceWidth * 0.5;
+            let width = percentages[element] * deviceWidth * 0.6;
             widthAry[element] = width;
         }); 
 
@@ -55,7 +55,7 @@ class BarChart extends Component {
                         </View>
                         <View style={{flex: 5, flexDirection: 'row'}}>
                             <Animated.View style={[styles.bar, styles[ing], {width: this.state[ing]}]}/>
-                            <Text>{`${numeral(ingredients[ing.toLowerCase()]/standardNutrition[ing]).format('0.0')}%`}</Text>
+                            <Text>{`${numeral(ingredients[ing.toLowerCase()]/standardNutrition[ing] * 100).format('0.0')}%`}</Text>
                         </View>
                     </View>
                 )}

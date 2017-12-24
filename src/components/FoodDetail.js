@@ -88,9 +88,9 @@ class FoodDetail extends Component {
                     <Button
                         large
                         iconRight
-                        backgroundColor={'#42A5F5'}
+                        backgroundColor={'#43A422'}
                         icon={{name: 'local-cafe'}}
-                        title='HAVE IT' 
+                        title='Order directly from Uber Eats!' 
                         onPress={()=>this.onHaveIt(restaurantDetail)}
                     />
                 </View>
