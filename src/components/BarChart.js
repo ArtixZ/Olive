@@ -35,8 +35,8 @@ class BarChart extends Component {
         const deviceWidth = Dimensions.get('window').width;
         let widthAry = {};
         Object.keys(percentages).forEach( element => {
-            let width = percentages[element] * deviceWidth * 0.5;
-            if (percentages[element] > 1) width = deviceWidth * 0.5;
+            let width = percentages[element] * deviceWidth * 0.48;
+            if (percentages[element] > 1) width = deviceWidth * 0.48;
             widthAry[element] = width;
         }); 
 
