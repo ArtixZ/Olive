@@ -20,7 +20,7 @@ export const sendMessage = (message) => {
     // };
     return (dispatch, getState) => {
         dispatch(renderInput(message));
-        getResponse(dispatch, message);
+        getResponse(dispatch, getState, message);
     }
 };
 
@@ -31,12 +31,15 @@ const renderInput = (message) => {
     }
 }
 
-const getResponse = (dispatch, message) => {
+const getResponse = (dispatch, getState, message) => {
     const response = phraseParser(message);
+    const store = getState();
+    const { accumulatedNutritions } = store.nutritionsRecord;
+    
     if (response.renderReport) {
         return dispatch({
             type: TXT_RESPONSE_MESSAGE,
-            payload: response
+            payload: { renderReport: true, accumulatedNutritions }
         });
     } else {
         dispatch({type: LOADING_RESPONSE_MESSAGE});

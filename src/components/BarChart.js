@@ -12,6 +12,7 @@ class BarChart extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.duration = props.duration ? props.duration : 1;
         const { ingredients } = props;
         // init ingredients
         Object.keys(standardNutrition).forEach( ing => {
@@ -24,7 +25,7 @@ class BarChart extends Component {
         const percentage = {};
         if(ingredients){
             for(let item in standardNutrition) {
-                percentage[item] = ingredients[item.toLowerCase()] / standardNutrition[item];
+                percentage[item] = ingredients[item.toLowerCase()] / (standardNutrition[item] * this.duration);
             }
             const width = this.getWidth(percentage);
             

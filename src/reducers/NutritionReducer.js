@@ -1,17 +1,22 @@
+import moment from 'moment';
+
 import {
     CURRENT_NUTRITIONS_FOR_FOOD,
     ACCUMULATE_NUTRITIONS,
 } from '../actions/types';
-import { standardNutrition } from '../assets/config/_NutritionData';
 import { 
     toTitleCase
 } from "../utils/utils";
+import { standardNutrition } from '../assets/config/_NutritionData';
 
 const INIT_STATE = {
     currentNutrition: {},
     accumulatedNutritions: {}
 }
 
+for(let i in standardNutrition) {
+    INIT_STATE.accumulatedNutritions[i] = 0;
+}
 
 export default (state = INIT_STATE, action) => {
     switch(action.type) {
@@ -22,11 +27,12 @@ export default (state = INIT_STATE, action) => {
         case ACCUMULATE_NUTRITIONS:
             const { accumulatedNutritions, currentNutrition } = state;
             const {payload: portion} = action;
-
-            Object.keys(currentNutrition).forEach( (val) => {
-                if(accumulatedNutritions[toTitleCase(val)]) accumulatedNutritions[toTitleCase(val)] += currentNutrition[val] * portion;
-                else accumulatedNutritions[toTitleCase(val)] = currentNutrition[val] * portion;
-            });
+            let newObj = {};
+            newObj['portion'] = portion;
+            newObj['nutrition'] = currentNutrition;
+            const currentTimeStamp = moment().toISOString();
+            
+            accumulatedNutritions[currentTimeStamp] = newObj;
 
             return state;
         default:

@@ -128,7 +128,7 @@ export default (state = INIT_STATE, action) => {
             return [...state, message];
         case TXT_RESPONSE_MESSAGE:
 
-            const {keyword, renderReport} = action.payload;
+            const {keyword, renderReport, accumulatedNutritions} = action.payload;
             if(renderReport) {
                 return [...state, 
                     {
@@ -146,7 +146,7 @@ export default (state = INIT_STATE, action) => {
                         direction: 'ingoing',
                         body: {
                             type: 'renderReport',
-                            payload: {}
+                            payload: accumulatedNutritions
                         }
                     }
                 ];

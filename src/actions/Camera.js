@@ -12,7 +12,8 @@ import {
  import {
     FOOD_CLASS_FROM_IMAGE,
     FOOD_NUTRITION,
- } from './urls'
+ } from './urls';
+
 import { 
     callAPI,
  } from './utils';
@@ -83,10 +84,10 @@ export const selectFoodPortion = (portion, messageId) => {
             type: SELECT_FOOD_PORTION,
             payload: {portion, messageId, currentNutrition}
         });
-        // dispatch({
-        //     type: ACCUMULATE_NUTRITIONS,
-        //     payload: portion,
-        // })
+        dispatch({
+            type: ACCUMULATE_NUTRITIONS,
+            payload: portion,
+        })
     }
 }
 export const deleteSelectedPortionById = (messageId) => {

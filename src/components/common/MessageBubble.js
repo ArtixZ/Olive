@@ -105,6 +105,7 @@ const MessageBubble = ({ outOrIn, timestamp, messageId, body, navigation, onResp
         case 'renderReport':
             return (
                 <ReportCard 
+                    nutritionHistory={body.payload}
                 />
             )
         default:
