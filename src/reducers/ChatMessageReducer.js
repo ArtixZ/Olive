@@ -1,4 +1,6 @@
 import moment from 'moment';
+import numeral from 'numeral';
+
 import {
     TXT_CHAT_MESSAGE,
     TXT_RESPONSE_MESSAGE,
@@ -13,9 +15,10 @@ import {
     DELETE_FOOD_PORTION,
 } from '../actions/types';
 
-import {data, IMAGES} from './data';
-import numeral from 'numeral';
-
+import { data, IMAGES } from './data';
+import { 
+    toTitleCase
+} from "../utils/utils";
 const IMG_BASE = './food_photos';
 
 
@@ -208,7 +211,12 @@ export default (state = INIT_STATE, action) => {
         case SELECT_FOOD_PORTION:
             const selected = state.find(i => i.msg_id === action.payload.messageId);
             const oldPayload = selected.body.payload;
-            const newPayload = {...oldPayload, portion: action.payload.portion};
+            const { currentNutrition, portion } = action.payload;
+            let newObj = {}
+            for(let i in currentNutrition) {
+                newObj[i] = currentNutrition[i] * portion;
+            }
+            const newPayload = {...oldPayload, portion: portion, nuritionStatistics: newObj};
             selected.body.payload = newPayload;
             return [...state];
         case DELETE_FOOD_PORTION:

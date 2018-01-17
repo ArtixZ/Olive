@@ -30,12 +30,28 @@ export const callAPI = async (method, {requestedType, url}, data) => {
 
     data["requested_types"] = requestedType;
     data = {...data, ...location, userInfo};
+
+    url = parseURL(url, data);
     
     return fetch(url, {
         method: method,
-        body: JSON.stringify(data)
+        body: method === 'POST' ? JSON.stringify(data) : null
     }).then(res => {
         return res.json()
     }).catch(err =>
          err)
+}
+
+const parseURL = (url, data) => {
+    const reg = /\{.+?\}/g;
+    const newURL = url.replace(reg, (m) => {
+        const keyVal = m.slice(1, m.length - 1);
+        
+        if(keyVal && data[keyVal]) return data[keyVal];
+        else {
+            console.log("didn't provide the value" + keyVal);
+            return "";
+        }
+    });
+    return newURL;
 }

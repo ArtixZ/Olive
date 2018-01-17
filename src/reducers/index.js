@@ -4,6 +4,7 @@ import ChatMessageReducer from './ChatMessageReducer';
 import CameraReducer from './CameraReducer';
 import FBAuthReducer from './FBAuthReducer';
 import SignupReducer from './SignupReducer';
+import NutritionReducer from "./NutritionReducer";
 
 export default combineReducers({
   FBAuth: FBAuthReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   messages: ChatMessageReducer,
   cameraImg: CameraReducer,
   signup: SignupReducer,
+  nutritionsRecord: NutritionReducer,
 });

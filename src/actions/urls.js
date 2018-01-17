@@ -15,3 +15,8 @@ export const CREATE_A_USER = {
     requestedType: ["new_user_registration"],
     url:`${baseURL}/event`
 }
+
+export const FOOD_NUTRITION = {
+    requestedType: ["food_nutrition"],
+    url: `${baseURL}/nutrition/food?name={foodName}`
+}

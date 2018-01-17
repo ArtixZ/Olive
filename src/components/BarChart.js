@@ -6,7 +6,7 @@ import {
     Text,
 } from 'react-native';
 import numeral from 'numeral';
-import { standardNutrition } from './_data';
+import { standardNutrition } from '../assets/config/_NutritionData';
 
 class BarChart extends Component {
     constructor(props) {
@@ -22,13 +22,15 @@ class BarChart extends Component {
     componentDidMount () {
         const { ingredients } = this.props;
         const percentage = {};
-        for(let item in standardNutrition) {
-            percentage[item] = ingredients[item.toLowerCase()] / standardNutrition[item];
+        if(ingredients){
+            for(let item in standardNutrition) {
+                percentage[item] = ingredients[item.toLowerCase()] / standardNutrition[item];
+            }
+            const width = this.getWidth(percentage);
+            
+            Animated.parallel(Object.keys(standardNutrition).map(item => Animated.timing(
+                this.state[item], {toValue: width[item], duration: 500}))).start();
         }
-        const width = this.getWidth(percentage);
-        
-        Animated.parallel(Object.keys(standardNutrition).map(item => Animated.timing(
-            this.state[item], {toValue: width[item], duration: 500}))).start();
     }
 
     getWidth (percentages) {
@@ -46,6 +48,7 @@ class BarChart extends Component {
     render() {
         const { Calories } = this.state;
         const { ingredients } = this.props;
+        if(!ingredients) return (<View style={{flex: 1}} />)
         return(
             <View style={{flex: 1}}>
                 

@@ -23,7 +23,9 @@ class FoodClassOption extends Component {
         deleteSelectedPortionById(messageId);
     }
     onPortion = () => {
-        this.props.navigation.navigate('nutritionDetails');
+        const { option } = this.props;
+        const { nuritionStatistics } = option;
+        this.props.navigation.navigate('nutritionDetails', { nuritionStatistics });
     }
     
     render() {

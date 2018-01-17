@@ -5,12 +5,19 @@ import {
     SELECT_OPTION,
     SELECT_FOOD_PORTION,
     DELETE_FOOD_PORTION,
+    CURRENT_NUTRITIONS_FOR_FOOD,
+    ACCUMULATE_NUTRITIONS,
  } from './types';
 
  import {
     FOOD_CLASS_FROM_IMAGE,
+    FOOD_NUTRITION,
  } from './urls'
-import { callAPI } from './utils';
+import { 
+    callAPI,
+ } from './utils';
+import {toTitleCase} from '../utils/utils';
+
 import { sendFoodClass, takenPic } from './Chat';
 
  
@@ -55,16 +62,31 @@ export const selectImgOption = (option) => {
         dispatch({
             type: SELECT_OPTION,
             payload: option
+        });
+
+        const foodName = toTitleCase(option.food_class);
+
+        callAPI('GET', FOOD_NUTRITION, { foodName })
+        .then(res => {
+            dispatch(recordNutrition(res));
+            // dispatch(sendFoodClass(image.uri, image.base64, res[FOOD_CLASS_FROM_IMAGE.requestedType[0]]));
         })
     }
 }
 
 export const selectFoodPortion = (portion, messageId) => {
     return(dispatch, getState) => {
+        const store = getState();
+        const { currentNutrition } = store.nutritionsRecord;
+
         dispatch({
             type: SELECT_FOOD_PORTION,
-            payload: {portion, messageId}
-        })
+            payload: {portion, messageId, currentNutrition}
+        });
+        // dispatch({
+        //     type: ACCUMULATE_NUTRITIONS,
+        //     payload: portion,
+        // })
     }
 }
 export const deleteSelectedPortionById = (messageId) => {
@@ -87,5 +109,12 @@ const imgFoodClass = (foodClass) => {
     return {
         type: CAMERA_IMAGE_FOOD_IMG,
         payload: foodClass
+    }
+}
+
+const recordNutrition = (nutritions) => {
+    return {
+        type: CURRENT_NUTRITIONS_FOR_FOOD,
+        payload: nutritions,
     }
 }

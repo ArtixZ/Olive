@@ -44,8 +44,8 @@ class FoodDetail extends Component {
     }
 
     render() {
-        const ingredients = {Calories: 19, Fat: 22, Sodium: 31, Carbs: 13, Sugars: 17, Protein: 17}
-
+        const { navigation } = this.props;
+        const { nuritionStatistics: ingredients } = navigation.state.params;
         const { thumbnailStyle, thumbnailContainerStyle, contentContainerStyle, detailContainerSty, foodInfoSty, abstractSty, ingredientSty, actionSty } = styles;
         
         // const { navigation } = this.props;
