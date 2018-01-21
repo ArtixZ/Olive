@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
-import { Platform } from 'react-native';
+import { 
+    Platform,
+    AsyncStorage,
+} from 'react-native';
 import Expo, { Font, Constants, Location, Permissions } from 'expo';
 import firebase from 'firebase';
 
 
 import {IMAGES} from '../reducers/data';
+
+const INITIAL_NUTRITION_RECORDS = {};
 
 function cacheImages(images) {
     return images.map(image => {
@@ -27,7 +32,9 @@ export default function PreloadHOC(WrappedComponent) {
 
         componentWillMount() {
             this._initFirebase();
-            this._loadAssetsAsync();
+            // this._loadAssetsAsync();
+            this._initAsyncStorage();
+            
             // if (Platform.OS === 'android' && !Constants.isDevice) {
             //     this.setState({
             //         errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
@@ -56,6 +63,15 @@ export default function PreloadHOC(WrappedComponent) {
             }
         }
 
+        async _initAsyncStorage() {
+            try {
+                await AsyncStorage.setItem('@MyLocalStore: nutritionRecords', JSON.stringify(INITIAL_NUTRITION_RECORDS));
+            } catch (error) {
+                console.log(error);
+            }
+            this.setState({ appIsReady: true }); 
+        }
+
         async _loadAssetsAsync() {
             const imageAssets = cacheImages(Object.values(IMAGES));
             // await Font.loadAsync({
@@ -66,7 +82,7 @@ export default function PreloadHOC(WrappedComponent) {
             await Promise.all([
                 ...imageAssets,
             ]);
-            this.setState({ appIsReady: true });            
+            // this.setState({ appIsReady: true });            
         }
 
         // _getLocationAsync = async () => {
