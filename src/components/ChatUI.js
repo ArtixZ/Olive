@@ -12,17 +12,19 @@ import {
   Image,
   LayoutAnimation,
   UIManager,
+  AsyncStorage,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { send, subscribe } from 'react-native-training-chat-server';
 import { Icon, Header } from 'react-native-elements';
-import { ImagePicker } from 'expo';
+import Expo, { ImagePicker } from 'expo';
 
 
 // import Header from './Header';
 import { MessageBubble, ReversedList } from './common';
-import { sendMessage, getResponse, selectCameraImg, getInitRecommendation, respondTakenImg } from '../actions';
-
+import { sendMessage, getResponse, selectCameraImg, getInitRecommendation, respondTakenImg, setInitNutritionHistory } from '../actions';
+import { nutritionRecordsKey } from '../assets/config/config';
+import { getAsyncStorage } from '../utils/utils';
 const TITLE = 'ChatForFood';
 
 const { width: SYSTEM_WIDTH } = Dimensions.get('window');
@@ -65,6 +67,21 @@ class ChatUI extends Component {
   componentWillMount() {
     const { getInitRecommendation } = this.props;
     getInitRecommendation();
+    this._initNutritionRecords();
+  }
+
+  _initNutritionRecords = () => {
+    getAsyncStorage(nutritionRecordsKey)
+      .then(res => {
+        if(res) {
+          this.props.setInitNutritionHistory(JSON.parse(res));
+        } else {
+          this.props.setInitNutritionHistory({});          
+        }
+      })
+      .catch( err => {
+        console.log(err);
+      })
   }
 
   componentWillUpdate (nextProps, nextState) {
@@ -275,7 +292,8 @@ export default connect(mapStateToProps, {
   getResponse, 
   selectCameraImg, 
   getInitRecommendation, 
-  respondTakenImg
+  respondTakenImg,
+  setInitNutritionHistory,
 })(ChatUI);
 // export default connect(mapStateToProps, {sendMessage, getResponse})((ChatUI));
 

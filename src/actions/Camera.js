@@ -1,3 +1,9 @@
+import moment from 'moment';
+import Expo from 'expo';
+import {
+    AsyncStorage,
+} from 'react-native';
+
 import { 
     CAMERA_IMAGE_URI,
     CAMERA_IMAGE_FOOD_IMG,
@@ -17,9 +23,13 @@ import {
 import { 
     callAPI,
  } from './utils';
-import {toTitleCase} from '../utils/utils';
+import {
+    toTitleCase,
+    setAsyncStorage,    
+} from '../utils/utils';
 
 import { sendFoodClass, takenPic } from './Chat';
+import { nutritionRecordsKey } from '../assets/config/config';
 
  
 export const selectCameraImg = (image) => {
@@ -78,18 +88,31 @@ export const selectImgOption = (option) => {
 export const selectFoodPortion = (portion, messageId) => {
     return(dispatch, getState) => {
         const store = getState();
-        const { currentNutrition } = store.nutritionsRecord;
-
+        const { currentNutrition, accumulatedNutritions } = store.nutritionsRecord;
+        
         dispatch({
             type: SELECT_FOOD_PORTION,
             payload: {portion, messageId, currentNutrition}
         });
-        dispatch({
-            type: ACCUMULATE_NUTRITIONS,
-            payload: portion,
-        })
+
+        let newObj = {};
+        newObj['portion'] = portion;
+        newObj['nutrition'] = currentNutrition;
+
+        const currentTimeStamp = moment().toISOString();
+
+        accumulatedNutritions[currentTimeStamp] = newObj;
+
+        setAsyncStorage(nutritionRecordsKey, accumulatedNutritions)
+            .then( (res) => {
+                dispatch({
+                    type: ACCUMULATE_NUTRITIONS,
+                    payload: { portion, accumulatedNutritions }
+                })
+            })
     }
 }
+
 export const deleteSelectedPortionById = (messageId) => {
     return(dispatch) => {
         dispatch({

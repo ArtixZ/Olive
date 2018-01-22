@@ -50,7 +50,6 @@ const getResponse = (dispatch, getState, message) => {
             dispatch(foodRecommendations(res[FOOD_DETAILS_FROM_KEYWORDS.requestedType[0]]))
         })
     }
-    
 };
 
 const foodRecommendations = (details) => {

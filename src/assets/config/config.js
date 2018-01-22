@@ -1,0 +1,1 @@
+export const nutritionRecordsKey = "nutritionRecords"; // the key that storing values in AsyncStorage.

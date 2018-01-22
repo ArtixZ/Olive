@@ -60,7 +60,7 @@ class BarChart extends Component {
                         </View>
                         <View style={{flex: 5, flexDirection: 'row'}}>
                             <Animated.View style={[styles.bar, styles[ing], {width: this.state[ing]}]}/>
-                            <Text>{`${numeral(ingredients[ing.toLowerCase()]/standardNutrition[ing] * 100).format('0.0')}%`}</Text>
+                            <Text>{`${numeral(ingredients[ing.toLowerCase()]/(standardNutrition[ing] * this.duration) * 100).format('0.0')}%`}</Text>
                         </View>
                     </View>
                 )}

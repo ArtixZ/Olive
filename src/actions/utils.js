@@ -55,3 +55,4 @@ const parseURL = (url, data) => {
     });
     return newURL;
 }
+
