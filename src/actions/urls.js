@@ -20,3 +20,8 @@ export const FOOD_NUTRITION = {
     requestedType: ["food_nutrition"],
     url: `${baseURL}/nutrition/food?name={foodName}`
 }
+
+export const FOOD_EATEN_RECORD = {
+    requestedType: ["food_eaten_record"],
+    url: `${baseURL}/event/food_record`
+}

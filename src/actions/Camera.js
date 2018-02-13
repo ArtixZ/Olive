@@ -18,6 +18,7 @@ import {
  import {
     FOOD_CLASS_FROM_IMAGE,
     FOOD_NUTRITION,
+    FOOD_EATEN_RECORD,
  } from './urls';
 
 import { 
@@ -94,6 +95,10 @@ export const selectFoodPortion = (portion, messageId) => {
             type: SELECT_FOOD_PORTION,
             payload: {portion, messageId, currentNutrition}
         });
+        callAPI('POST', FOOD_EATEN_RECORD, { food_name: currentNutrition, quantity: portion })
+        .then(res => {
+            console.log(res);
+        })
 
         let newObj = {};
         newObj['portion'] = portion;
