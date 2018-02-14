@@ -18,7 +18,7 @@ class App extends Component {
   state = { loggedIn: null };
 
   componentWillMount() {
-    
+    console.log(reducers)
   }
 
   render() {

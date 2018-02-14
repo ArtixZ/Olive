@@ -8,15 +8,12 @@ import {
 import { 
     toTitleCase
 } from "../utils/utils";
+import userInfo from "../utils/user";
 import { standardNutrition } from '../assets/config/_NutritionData';
 
 const INIT_STATE = {
     currentNutrition: {},
     accumulatedNutritions: {}
-}
-
-for(let i in standardNutrition) {
-    INIT_STATE.accumulatedNutritions[i] = 0;
 }
 
 export default (state = INIT_STATE, action) => {

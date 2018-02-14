@@ -6,7 +6,9 @@ import {
 import Expo, { Font, Constants, Location, Permissions } from 'expo';
 import firebase from 'firebase';
 
-
+import { getAsyncStorage } from '../utils/utils';
+import userInfo from '../utils/user';
+import { nutritionRecordsKey } from '../assets/config/config';
 import {IMAGES} from '../reducers/data';
 
 const INITIAL_NUTRITION_RECORDS = {};
@@ -65,7 +67,8 @@ export default function PreloadHOC(WrappedComponent) {
 
         async _initAsyncStorage() {
             try {
-                await AsyncStorage.setItem('@MyLocalStore: nutritionRecords', JSON.stringify(INITIAL_NUTRITION_RECORDS));
+                const nutritionRecord = await getAsyncStorage(nutritionRecordsKey);
+                userInfo.setNutritionRecords(JSON.parse(nutritionRecord));
             } catch (error) {
                 console.log(error);
             }
@@ -100,7 +103,7 @@ export default function PreloadHOC(WrappedComponent) {
             if (!this.state.appIsReady) {
                 return <Expo.AppLoading />;
             }
-            return <WrappedComponent {...this.props}/>
+            return <WrappedComponent {...this.props} />
         }
     }
 };

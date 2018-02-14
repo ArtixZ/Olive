@@ -23,7 +23,7 @@ class FoodDetail extends Component {
                                                 navigation.goBack(curRoute.key);
                                             }}
                                         />}
-                        centerComponent={{ text: 'Food Profile', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
+                        centerComponent={{ text: 'Statistics', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
                     />)
         }
     };

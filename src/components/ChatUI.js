@@ -21,15 +21,22 @@ import Expo, { ImagePicker } from 'expo';
 
 
 // import Header from './Header';
+import { calcNutritionForAWeek } from '../utils/utils';
 import { MessageBubble, ReversedList } from './common';
 import { sendMessage, getResponse, selectCameraImg, getInitRecommendation, respondTakenImg, setInitNutritionHistory } from '../actions';
 import { nutritionRecordsKey } from '../assets/config/config';
 import { getAsyncStorage } from '../utils/utils';
-const TITLE = 'ChatForFood';
 
 const { width: SYSTEM_WIDTH } = Dimensions.get('window');
 
 class ChatUI extends Component {
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+      nutritionsRecord: this.props.nutritionsRecord
+    })
+  }
+
   static navigationOptions = {
     header: ( {navigation} ) => {
       return (
@@ -49,9 +56,20 @@ class ChatUI extends Component {
                             name='graph'
                             type='octicon'
                             color='#43496A'
+                            onPress={()=> {
+                              const currentRoute = navigation.state.routes.find(item => item.routeName === 'chatUI');
+                              console.log()
+                              const { accumulatedNutritions } = currentRoute.params.nutritionsRecord;
+                              const weeklyNutrition = calcNutritionForAWeek(accumulatedNutritions);
+                              navigation.navigate('nutritionDetails', { nuritionStatistics: weeklyNutrition });
+                            }}
                           />}
         />)
     }
+  }
+
+  navToNutritionDetail = (navigation) => {
+    console.log(this.props);
   }
 
   constructor(props){
@@ -283,8 +301,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({ messages }) => {
-    return { messages };
+const mapStateToProps = ({ messages, nutritionsRecord }) => {
+    return { messages, nutritionsRecord };
 };
 
 export default connect(mapStateToProps, {
