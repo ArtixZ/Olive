@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, Text, Dimensions, Linking } from 'react-native';
 import { Rating, Button, Header, Icon } from 'react-native-elements';
 import numeral from 'numeral';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 
 import BarChart from './BarChart';
 
@@ -89,7 +90,13 @@ class FoodDetail extends Component {
                         large
                         iconRight
                         backgroundColor={'#43A422'}
-                        icon={{name: 'local-cafe'}}
+                        icon={
+                            <Icon
+                                name='local-cafe'
+                                size={15}
+                                color='white'
+                            />
+                        }
                         title='Order directly from Uber Eats!' 
                         onPress={()=>this.onHaveIt(restaurantDetail)}
                     />

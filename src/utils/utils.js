@@ -18,9 +18,20 @@ export const setAsyncStorage = (key, obj) => AsyncStorage.setItem(key, JSON.stri
 
 export const getAsyncStorage = (key) => AsyncStorage.getItem(key);
 
+const INITIAL_STATE = {
+    "Calories": 0,
+    "Carbohydrate": 0,
+    "Fat": 0,
+    "Fiber": 0,
+    "Protein": 0,
+    "Saturated": 0,
+    "Sodium": 0,
+    "Sugars": 0,
+}
 export const calcNutritionForAWeek = (nutritionHistory) => {
+    nutritionHistory = nutritionHistory ? nutritionHistory : INITIAL_STATE
     const daysWithinAWeek = Object.keys(nutritionHistory).reduce((pre, cur) => {
-        if(isWithinAWeek((moment(cur)))) {
+        if(isWithinAWeek((moment(new Date(cur))))) {
             return [...pre, cur];
         } else return pre;
     }, []);

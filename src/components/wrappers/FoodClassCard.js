@@ -7,7 +7,7 @@ import {
     Platform,
     FlatList
 } from 'react-native';
-import * as Progress from 'react-native-progress';
+// import * as Progress from 'react-native-progress';
 import { FileSystem } from 'expo';
 
 class FoodClassCard extends Component {
@@ -54,7 +54,7 @@ class FoodClassCard extends Component {
                 <View style={imgContainer}>
                     <Image
                         style={imgSty}
-                        source={{ uri: picURI }}
+                        uri= {picURI}
                     />
                 </View>
                 <FlatList 

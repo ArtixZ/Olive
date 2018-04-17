@@ -4,7 +4,7 @@ import AnimatedEllipsis from 'react-native-animated-ellipsis';
 import { FileSystem } from 'expo';
 import { Text, Divider } from 'react-native-elements'
 
-import CardWrapper from '../wrappers/CardWrapper';
+// import CardWrapper from '../wrappers/CardWrapper';
 import SwipeCard from '../wrappers/SwipeCard';
 import FoodClassCard from '../wrappers/FoodClassCard';
 import FoodClassOptions from '../FoodClassOptions';

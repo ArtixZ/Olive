@@ -15,7 +15,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { send, subscribe } from 'react-native-training-chat-server';
+// import { send, subscribe } from 'react-native-training-chat-server';
 import { Icon, Header } from 'react-native-elements';
 import Expo, { ImagePicker } from 'expo';
 
@@ -235,7 +235,6 @@ const styles = StyleSheet.create({
     height: '100%',
     borderColor: '#5C6BC0',
     borderBottomWidth:2,
-    marginBottom: -10
   },
   container: {
     flex: 1,

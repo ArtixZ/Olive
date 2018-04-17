@@ -1,23 +1,27 @@
-// {
-//   "expo": {
-//     "sdkVersion": "19.0.0"
-//   },
-//   "facebookScheme": "fb1948774228735307" 
-// }
-
 {
   "expo": {
-   "name": "Olive",
-   "icon": "./src/assets/pics/demoLogo.png",
-   "version": "0.0.5",
-   "slug": "Olive",
-   "sdkVersion": "19.0.0",
-   "ios": {
-     "bundleIdentifier": "com.GenerativeLabs.Olive"
-   },
-   "android": {
-     "package": "com.GenerativeLabs.Olive"
-   }
-  },
-  "facebookScheme": "fb1948774228735307" 
+    "name": "olive",
+    "description": "This project is really great.",
+    "slug": "olive",
+    "privacy": "public",
+    "sdkVersion": "26.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
 }

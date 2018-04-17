@@ -34,7 +34,7 @@ export default class extends Component {
         this.state = {}
     }
 
-    onCardPress(card) {
+    onCardPress = (card) => {
         const {navigation} = this.props;
         navigation.navigate('foodDetail', {foodInfo: card});
     }

@@ -13,7 +13,7 @@ class ReversedList extends React.Component {
       data: [...props.data].reverse()
     };
   }
-  _keyExtractor = (item, index) => index;
+  _keyExtractor = (item, index) => `${index}`;
 
   // when provided data array changes,
   // update the internal reversed copy
