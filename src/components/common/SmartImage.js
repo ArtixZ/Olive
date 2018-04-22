@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import * as _ from "lodash";
 import {Image, Animated, StyleSheet, View, Platform} from "react-native";
 import {BlurView, FileSystem} from "expo";
 import SHA1 from "crypto-js/sha1";
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+const propsToCopy = [
+    "borderRadius", "borderBottomLeftRadius", "borderBottomRightRadius", "borderTopLeftRadius", "borderTopRightRadius"
+];
 
 export default class SmartImage extends Component {
     static propTypes = {
-        style?: PropTypes.style,
-        preview?: PropTypes.string,
-        uri: PropTypes.string,
+        style: PropTypes.object,
+        preview: PropTypes.string,
+        uri: PropTypes.string.isRequired,
     }
     
     constructor(props) {
@@ -49,12 +53,16 @@ export default class SmartImage extends Component {
     render() {
         const {style} = this.props;
         const {uri, intensity} = this.state;
+        const computedStyle = [
+            StyleSheet.absoluteFill,
+            _.pickBy(StyleSheet.flatten(style), (value, key) => propsToCopy.indexOf(key) !== -1)
+        ];
         return (
             <View {...{style}}>
                 {
                     uri && (
                         <Image
-                            source={{ uri }}
+                            source={{ isStatic: true, uri }}
                             resizeMode="cover"
                             style={computedStyle}
                             onLoadEnd={() => this.onLoadEnd(uri)}
@@ -62,7 +70,7 @@ export default class SmartImage extends Component {
                     )
                 }
                 {
-                    Platform.OS === "ios" && <AnimatedBlurView tint="default" style={computedStyle} {...{intensity}} />
+                    Platform.OS === "ios" && <AnimatedBlurView tint="default"  {...{intensity}} />
                 }
             </View>
         );

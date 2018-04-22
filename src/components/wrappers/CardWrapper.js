@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, Platform } from 'react-native';
 import { Card, Rating } from 'react-native-elements'
 import numeral from 'numeral';
+import SmartImage from '../common/SmartImage';
 
 import { CardHorizontal, CardSection } from '../common';
 
@@ -15,9 +16,9 @@ const CardWrapper = ({ thumbnail_image, foodName, restaurantName, tags, suggesti
                 <TouchableOpacity style={{flex:1, flexDirection: 'row'}} onPress={onCardPress}>
                     <View flex={3} flexDirection={'column'}>
                         <View style={thumbnailContainerStyle}>
-                            <Image
+                            <SmartImage
                                 style={thumbnailStyle}
-                                source={{uri: thumbnail_image}}
+                                uri={thumbnail_image}
                             />
                         </View>
                         
