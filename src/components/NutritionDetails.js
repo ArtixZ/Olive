@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, Dimensions, Linking } from 'react-native';
+import { View, Text, Dimensions, Linking } from 'react-native';
 import { Rating, Button, Header, Icon } from 'react-native-elements';
 import numeral from 'numeral';
 

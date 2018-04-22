@@ -3,12 +3,12 @@ import { Card, CheckBox } from 'react-native-elements';
 import {
     View,
     Text,
-    Image,
     Platform,
     FlatList
 } from 'react-native';
 // import * as Progress from 'react-native-progress';
 import { FileSystem } from 'expo';
+import SmartImage from '../common/SmartImage';
 
 class FoodClassCard extends Component {
     constructor(props) {
@@ -52,7 +52,7 @@ class FoodClassCard extends Component {
         return (
             <Card containerStyle={cardWrapperSty} wrapperStyle={{ flex: 1, flexDirection: 'column' }}>
                 <View style={imgContainer}>
-                    <Image
+                    <SmartImage
                         style={imgSty}
                         uri= {picURI}
                     />

@@ -11,6 +11,7 @@ import FoodClassOptions from '../FoodClassOptions';
 import FoodClassOption from '../FoodClassOption';
 import ReportCard from '../ReportCard';
 import { respondTakenImg } from '../../actions/Camera';
+import SmartImage from './SmartImage';
 
 const MessageBubble = ({ outOrIn, timestamp, messageId, body, navigation, onResponse }) => {
 

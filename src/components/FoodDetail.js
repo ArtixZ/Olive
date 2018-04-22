@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Image, Text, Dimensions, Linking } from 'react-native';
+import { View, Text, Dimensions, Linking } from 'react-native';
 import { Rating, Button, Header, Icon } from 'react-native-elements';
 import numeral from 'numeral';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 
 import BarChart from './BarChart';
+import SmartImage from './common/SmartImage';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -57,9 +58,9 @@ class FoodDetail extends Component {
                 
                 <View style = {foodInfoSty}>
                     <View style={thumbnailContainerStyle}>
-                        <Image
+                        <SmartImage
                             style={thumbnailStyle}
-                            source={{uri: pic}}
+                            uri={pic}
                         />
                     </View>
                     <View style={contentContainerStyle}>

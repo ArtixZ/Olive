@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import { Card, Rating } from 'react-native-elements'
 import numeral from 'numeral';
 import SmartImage from '../common/SmartImage';

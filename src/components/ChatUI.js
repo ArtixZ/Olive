@@ -9,7 +9,6 @@ import {
   KeyboardAvoidingView,
   StatusBar,
   FlatList,
-  Image,
   LayoutAnimation,
   UIManager,
   AsyncStorage,
