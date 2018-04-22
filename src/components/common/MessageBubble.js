@@ -132,10 +132,12 @@ const styles = {
     },
     textStyle: {
         alignItems:'center',
-        marginLeft:30,
-        marginRight:30,        
+        marginLeft:10,
+        marginRight:40,        
         minHeight: 40,
-        fontSize: 22
+        marginTop: 5,
+        fontSize: 22,
+        color: '#424242',
     },
     dividerStyle: {
         backgroundColor: '#999',

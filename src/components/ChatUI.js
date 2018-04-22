@@ -40,6 +40,7 @@ class ChatUI extends Component {
     header: ( {navigation} ) => {
       return (
         <Header
+          statusBarProps={{ backgroundColor: "#43496A", barStyle: "dark-content" }}
           outerContainerStyles={styles.headerSty}
           leftComponent={<Icon 
                             containerStyle={styles.leftHeaderIconWrapper}

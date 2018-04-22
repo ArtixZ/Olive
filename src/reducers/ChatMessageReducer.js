@@ -167,10 +167,26 @@ export default (state = INIT_STATE, action) => {
             return [...state, foodClassMessage]
         case GET_FOOD_INITIAL_RECOMMENDATIONS: 
             const initialFoodRecs = generateInitMsgs(action.payload);
-            return [initialFoodRecs];
+            return [{
+                msg_id: `temp_${generateGuuId()}`,
+                timeStamp: moment().toISOString(),
+                direction: 'ingoing',
+                body: {
+                    type: 'txt',
+                    msg: "Here are food recommandations for you:"
+                }
+            }, initialFoodRecs];
         case GET_RECIPE_INITIAL_RECOMMENDATIONS:
             const initialRecipeRecs = generateRecipeMsgs(action.payload);
-            return [...state, initialRecipeRecs];
+            return [...state, {
+                msg_id: `temp_${generateGuuId()}`,
+                timeStamp: moment().toISOString(),
+                direction: 'ingoing',
+                body: {
+                    type: 'txt',
+                    msg: "Here are recipe recommandations for you:"
+                }
+            },initialRecipeRecs];
         case GET_FOOD_RECOMMENDATIONS: 
             const recommendFoods = generateInitMsgs(action.payload);
             state.pop();            
