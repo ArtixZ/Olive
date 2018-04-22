@@ -6,6 +6,7 @@ import {
     TXT_RESPONSE_MESSAGE,
     FOOD_CLASS,
     GET_FOOD_INITIAL_RECOMMENDATIONS,
+    GET_RECIPE_INITIAL_RECOMMENDATIONS,
     GET_FOOD_RECOMMENDATIONS,
     TAKEN_IMAGE,
     LOADING_RESPONSE_MESSAGE,
@@ -165,8 +166,11 @@ export default (state = INIT_STATE, action) => {
             const foodClassMessage = generateFoodClassMsg(action.payload);
             return [...state, foodClassMessage]
         case GET_FOOD_INITIAL_RECOMMENDATIONS: 
-            const initialMsgs = generateInitMsgs(action.payload);
-            return initialMsgs;
+            const initialFoodRecs = generateInitMsgs(action.payload);
+            return [initialFoodRecs];
+        case GET_RECIPE_INITIAL_RECOMMENDATIONS:
+            const initialRecipeRecs = generateRecipeMsgs(action.payload);
+            return [...state, initialRecipeRecs];
         case GET_FOOD_RECOMMENDATIONS: 
             const recommendFoods = generateInitMsgs(action.payload);
             state.pop();            
@@ -259,53 +263,82 @@ function generateTakenPic(uri) {
     }
 }
 
+function generateRecipeMsgs(messages) {
+    messages = messages.filter( i=> !!i.photos);
+    return (
+        {
+            msg_id: `temp_${generateGuuId()}`,
+            timeStamp: moment().toISOString(),
+            direction: 'ingoing',
+            body: {
+                type: 'recipeCard',
+                payload: messages
+            }
+        }
+    )
+}
+
 function generateInitMsgs(messages) {
     messages = messages.filter( i=> !!i.image_uri);
-    if(messages.length < 3) {
-        const initialMsgs = messages.map( (msg) => {
-            return (
-            {
-                msg_id: `temp_${generateGuuId()}`,
-                timeStamp: moment().toISOString(),
-                direction: 'ingoing',
-                body: {
-                    type: 'card',
-                    payload: msg
-                }
-            })
+    return (
+        {
+            msg_id: `temp_${generateGuuId()}`,
+            timeStamp: moment().toISOString(),
+            direction: 'ingoing',
+            body: {
+                type: 'card',
+                payload: messages
+            }
         })
-        return initialMsgs;
-    }
-    const m = Math.ceil(messages.length / 3);
-    const n = Math.ceil(2 * messages.length / 3);
-
-    return messages.length === 0 ? null : 
-    [{
-        msg_id: `temp_${generateGuuId()}`,
-        timeStamp: moment().toISOString(),
-        direction: 'ingoing',
-        body: {
-            type: 'card',
-            payload: messages.slice(0,m)
-        }
-    }, {
-        msg_id: `temp_${generateGuuId()}`,
-        timeStamp: moment().toISOString(),
-        direction: 'ingoing',
-        body: {
-            type: 'card',
-            payload: messages.slice(m,n)
-        }
-    }, {
-        msg_id: `temp_${generateGuuId()}`,
-        timeStamp: moment().toISOString(),
-        direction: 'ingoing',
-        body: {
-            type: 'card',
-            payload: messages.slice(n)
-        }
-    }]
 }
+
+// function generateInitMsgs(messages) {
+//     messages = messages.filter( i=> !!i.image_uri);
+//     if(messages.length < 3) {
+//         const initialMsgs = messages.map( (msg) => {
+//             return (
+//             {
+//                 msg_id: `temp_${generateGuuId()}`,
+//                 timeStamp: moment().toISOString(),
+//                 direction: 'ingoing',
+//                 body: {
+//                     type: 'card',
+//                     payload: msg
+//                 }
+//             })
+//         })
+//         return initialMsgs;
+//     }
+//     const m = Math.ceil(messages.length / 3);
+//     const n = Math.ceil(2 * messages.length / 3);
+
+//     return messages.length === 0 ? null : 
+//     [{
+//         msg_id: `temp_${generateGuuId()}`,
+//         timeStamp: moment().toISOString(),
+//         direction: 'ingoing',
+//         body: {
+//             type: 'card',
+//             payload: messages.slice(0,m)
+//         }
+//     }, {
+//         msg_id: `temp_${generateGuuId()}`,
+//         timeStamp: moment().toISOString(),
+//         direction: 'ingoing',
+//         body: {
+//             type: 'card',
+//             payload: messages.slice(m,n)
+//         }
+//     }, {
+//         msg_id: `temp_${generateGuuId()}`,
+//         timeStamp: moment().toISOString(),
+//         direction: 'ingoing',
+//         body: {
+//             type: 'card',
+//             payload: messages.slice(n)
+//         }
+//     }]
+// }
 
 
 function generateGuuId() {

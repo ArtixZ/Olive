@@ -33,9 +33,7 @@ class FoodDetail extends Component {
         super(props);
     }
 
-    onHaveIt = (restaurantDetail) => {
-        const { restaurant_id } = restaurantDetail;
-        const url = `https://www.ubereats.com/boston/food-delivery/${restaurant_id}`;
+    onHaveIt = (url) => {
         Linking.canOpenURL(url).then(supported => {
             if (!supported) {
                 console.log('Can\'t handle url: ' + url);
@@ -46,17 +44,18 @@ class FoodDetail extends Component {
     }
 
     render() {
-        // const ingredients = {Calories: 19, Fat: 22, Sodium: 31, Carbs: 13, Sugars: 17, Protein: 17}
+        // const ingredients = {Calories: 19, Fat: 22, .Sodium: 31, Carbs: 13, Sugars: 17, Protein: 17}
 
-        const { thumbnailStyle, thumbnailContainerStyle, contentContainerStyle, detailContainerSty, foodInfoSty, abstractSty, ingredientSty, actionSty } = styles;
+        const { thumbnailStyle, thumbnailContainerStyle, contentContainerStyle, detailContainerSty, recipeInfoSty, abstractSty, ingredientSty, actionSty } = styles;
         
         const { navigation } = this.props;
-        const { foodInfo } = navigation.state.params;
-        const { pic, name, restaurantName, restaurantDetail, highlights, rating, tags, distance, price, nutrition: ingredients } = foodInfo;
+        const { recipeInfo } = navigation.state.params;
+        let { photos: pic, recipe_name: name, tags, description, nutrition: ingredients, url } = recipeInfo;
+        pic = pic[0]
         return(
             <View style = {detailContainerSty}>
                 
-                <View style = {foodInfoSty}>
+                <View style = {recipeInfoSty}>
                     <View style={thumbnailContainerStyle}>
                         <SmartImage
                             style={thumbnailStyle}
@@ -65,19 +64,19 @@ class FoodDetail extends Component {
                     </View>
                     <View style={contentContainerStyle}>
                         <Text style={{fontWeight: 'bold', fontSize: 17}}>{name}</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+                        {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                             <Text>{restaurantName}</Text>
-                        </View>
-                        <Text style={{color:'grey'}}>{`${numeral(distance).format('0.0')} mi`}</Text>
-                        <Rating
+                        </View> */}
+                        {/* <Text style={{color:'grey'}}>{`${numeral(distance).format('0.0')} mi`}</Text> */}
+                        {/* <Rating
                             imageSize={20}
                             readonly
                             startingValue={rating}
-                        />
-                        <Text style={{textAlign:'center'}}>{highlights.toString()}</Text>
+                        /> */}
+                        <Text style={{textAlign:'center'}}>{tags.toString()}</Text>
                     </View>
                     <View style = {abstractSty}>
-                        <Text>This is a bowl of lively salad of grilled chicken. </Text>
+                        <Text>{description}</Text>
                     </View>
                 </View>
                 <View style = {ingredientSty}>
@@ -88,16 +87,6 @@ class FoodDetail extends Component {
 
                 <View style = {actionSty}>
                     <Button
-                        iconRight
-                        icon={
-                            <Icon
-                                name='restaurant'
-                                size={20}
-                                color='white'
-                            />
-                        }
-                        title='Order directly from Uber Eats!' 
-                        onPress={()=>this.onHaveIt(restaurantDetail)}
                         titleStyle={{ fontWeight: "600", fontSize: 20 }}
                         buttonStyle={{
                             backgroundColor: "rgba(92, 99,216, 1)",
@@ -106,6 +95,17 @@ class FoodDetail extends Component {
                             borderWidth: 0,
                             borderRadius: 5
                         }}
+                        iconRight
+                        backgroundColor={'#43A422'}
+                        icon={
+                            <Icon
+                                name='kitchen'
+                                size={20}
+                                color='white'
+                            />
+                        }
+                        title='Check it out on Allrecipes.com!' 
+                        onPress={()=>this.onHaveIt(url)}
                     />
                 </View>
             </View>
@@ -128,7 +128,7 @@ const styles = {
         backgroundColor: '#fff',
         flex: 1
     },
-    foodInfoSty: {
+    recipeInfoSty: {
         marginLeft: 10,
         marginRight: 10,
         flex: 5,

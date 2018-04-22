@@ -6,6 +6,7 @@ import { Text, Divider } from 'react-native-elements'
 
 // import CardWrapper from '../wrappers/CardWrapper';
 import SwipeCard from '../wrappers/SwipeCard';
+import SwipeRecipeCard from '../wrappers/SwipeRecipeCard';
 import FoodClassCard from '../wrappers/FoodClassCard';
 import FoodClassOptions from '../FoodClassOptions';
 import FoodClassOption from '../FoodClassOption';
@@ -39,6 +40,14 @@ const MessageBubble = ({ outOrIn, timestamp, messageId, body, navigation, onResp
                     navigation={navigation}
                 />
             );
+        case 'recipeCard':
+            const { payload: recipePayload } = body;
+            return (
+                <SwipeRecipeCard
+                    cards={recipePayload}
+                    navigation={navigation}
+                />
+            )
         case 'divider':
             return <Divider style={dividerStyle} />
         case 'imgRecognition':

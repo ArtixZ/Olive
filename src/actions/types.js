@@ -24,6 +24,7 @@ export const DELETE_FOOD_PORTION = 'DELETE_FOOD_PORTION';
 /*--------------- recommendation ---------------------*/
 
 export const GET_FOOD_INITIAL_RECOMMENDATIONS = 'GET_FOOD_INITIAL_RECOMMENDATIONS';
+export const GET_RECIPE_INITIAL_RECOMMENDATIONS = 'GET_RECIPE_INITIAL_RECOMMENDATIONS';
 export const GET_FOOD_RECOMMENDATIONS = 'GET_FOOD_RECOMMENDATIONS';
 
 /*--------------- signup ---------------------*/
